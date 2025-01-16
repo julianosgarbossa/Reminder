@@ -9,32 +9,34 @@ import UIKit
 
 class LoginViewController: UIViewController {
 
-    private let contentView = LoginView()
+    private let loginView = LoginView()
+    private let loginViewModel = LoginViewModel()
     var handleAreaHeigh: CGFloat = 50.0
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.contentView.delegate = self
+        self.loginView.delegate = self
         self.setVisualElements()
     }
     
     private func setVisualElements() {
-        self.view.addSubview(contentView)
+        self.view.addSubview(loginView)
         
         self.setConstraints()
         self.setGesture()
     }
     
     private func setConstraints() {
-        contentView.translatesAutoresizingMaskIntoConstraints = false
+        loginView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            contentView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
-            contentView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
-            contentView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor),
+            loginView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
+            loginView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
+            loginView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor),
         ])
         
-        let heighConstraint = contentView.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.5).isActive = true
+//        let heighConstraint = 
+        loginView.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.5).isActive = true
         
     }
     
@@ -48,9 +50,9 @@ class LoginViewController: UIViewController {
     
     func animatedShow(completion: (() -> Void)? = nil) {
         self.view.layoutIfNeeded()
-        contentView.transform = CGAffineTransform(translationX: 0, y: contentView.frame.height)
+        loginView.transform = CGAffineTransform(translationX: 0, y: loginView.frame.height)
         UIView.animate(withDuration: 0.3, animations: {
-            self.contentView.transform = .identity
+            self.loginView.transform = .identity
             self.view.layoutIfNeeded()
         }) { _ in
             completion?()
@@ -60,7 +62,6 @@ class LoginViewController: UIViewController {
 
 extension LoginViewController: LoginDelegate {
     func sendLoginData(user: String, password: String) {
-        print(user)
-        print(password)
+        self.loginViewModel.doAuth(userNameLogin: user, password: password)
     }
 }
