@@ -10,6 +10,7 @@ import UIKit
 class SplashViewController: UIViewController {
 
     private let contentView = SplashView()
+    public weak var splashFlowDelegate: SplashFlowDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -17,6 +18,15 @@ class SplashViewController: UIViewController {
         
         // ciclo de desição se vai para login ou para menu
         self.setVisualElements()
+    }
+    
+    init(splashFlowDelegate: SplashFlowDelegate?) {
+        super.init(nibName: nil, bundle: nil)
+        self.splashFlowDelegate = splashFlowDelegate
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     private func setVisualElements() {
@@ -44,11 +54,6 @@ class SplashViewController: UIViewController {
     
     @objc
     private func showLogin() {
-        let login = LoginViewController()
-        login.modalPresentationStyle = .overCurrentContext
-        login.modalTransitionStyle = .crossDissolve
-        self.present(login, animated: false) {
-            login.animatedShow()
-            }
+        self.splashFlowDelegate?.openLogin()
     }
 }

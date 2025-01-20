@@ -8,15 +8,25 @@
 import UIKit
 
 class LoginViewController: UIViewController {
-
     private let loginView = LoginView()
     private let loginViewModel = LoginViewModel()
     var handleAreaHeigh: CGFloat = 50.0
+    public weak var loginFlowDelegate: LoginFlowDelegate?
+    
+    init(loginFlowDelegate: LoginFlowDelegate) {
+        super.init(nibName: nil, bundle: nil)
+        self.loginFlowDelegate = loginFlowDelegate
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.loginView.delegate = self
         self.setVisualElements()
+        self.bindViewModel()
     }
     
     private func setVisualElements() {
@@ -35,7 +45,7 @@ class LoginViewController: UIViewController {
             loginView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor),
         ])
         
-//        let heighConstraint = 
+//        let heighConstraint =
         loginView.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.5).isActive = true
         
     }
@@ -56,6 +66,15 @@ class LoginViewController: UIViewController {
             self.view.layoutIfNeeded()
         }) { _ in
             completion?()
+        }
+    }
+    
+    private func bindViewModel() {
+        loginViewModel.sucessResult = { [weak self] in
+            // chamar a próxima tela de menu com sucesso
+            self?.loginFlowDelegate?.navigateToHome()
+            print("chegou na viewController")
+            // com erro, mostrar o erro para o usuário
         }
     }
 }
