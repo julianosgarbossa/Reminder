@@ -10,16 +10,16 @@ import UIKit
 class ReminderFlowController {
     // MARK: Properties
     private var navigationController: UINavigationController?
-//    private let viewControllerFactory
+    private let viewControllerFactory: ViewControllerFactory
     
     // MARK: init
     public init() {
-        
+        self.viewControllerFactory = ViewControllerFactory()
     }
     
     // MARK: startFlow
     func start() -> UINavigationController? {
-        let startViewController = SplashViewController(splashFlowDelegate: self)
+        let startViewController = viewControllerFactory.makeSplashViewController(flowDelegate: self)
         self.navigationController = UINavigationController(rootViewController: startViewController)
         return self.navigationController
     }
@@ -28,10 +28,10 @@ class ReminderFlowController {
 // MARK: Splash
 extension ReminderFlowController: SplashFlowDelegate {
     func openLogin() {
-        let loginViewController = LoginViewController(loginFlowDelegate: self)
+        let loginViewController = viewControllerFactory.makeLoginViewController(flowDelegate: self)
         loginViewController.modalPresentationStyle = .overCurrentContext
         loginViewController.modalTransitionStyle = .crossDissolve
-        self.navigationController?.present(loginViewController, animated: true) {
+        self.navigationController?.present(loginViewController, animated: false) {
             loginViewController.animatedShow()
         }
     }
@@ -40,7 +40,7 @@ extension ReminderFlowController: SplashFlowDelegate {
 // MARK: Login
 extension ReminderFlowController: LoginFlowDelegate {
     func navigateToHome() {
-        self.navigationController?.dismiss(animated: true)
+        self.navigationController?.dismiss(animated: false)
         let viewController = UIViewController()
         viewController.view.backgroundColor = .blue
         self.navigationController?.pushViewController(viewController, animated: true)

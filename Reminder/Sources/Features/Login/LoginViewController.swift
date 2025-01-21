@@ -8,14 +8,15 @@
 import UIKit
 
 class LoginViewController: UIViewController {
-    private let loginView = LoginView()
+    private let loginView: LoginView
     private let loginViewModel = LoginViewModel()
     var handleAreaHeigh: CGFloat = 50.0
     public weak var loginFlowDelegate: LoginFlowDelegate?
     
-    init(loginFlowDelegate: LoginFlowDelegate) {
-        super.init(nibName: nil, bundle: nil)
+    init(loginView: LoginView, loginFlowDelegate: LoginFlowDelegate) {
+        self.loginView = loginView
         self.loginFlowDelegate = loginFlowDelegate
+        super.init(nibName: nil, bundle: nil)
     }
     
     required init?(coder: NSCoder) {
@@ -70,11 +71,51 @@ class LoginViewController: UIViewController {
     }
     
     private func bindViewModel() {
-        loginViewModel.sucessResult = { [weak self] in
+        loginViewModel.sucessResult = { [weak self] result in
             // chamar a próxima tela de menu com sucesso
-            self?.loginFlowDelegate?.navigateToHome()
+            self?.presentSaveLoginAlert(userNameLogin: result)
+//            self?.loginFlowDelegate?.navigateToHome()
             print("chegou na viewController")
             // com erro, mostrar o erro para o usuário
+        }
+    }
+    
+    private func presentSaveLoginAlert(userNameLogin: String) {
+        let alertController = UIAlertController(title: "Salvar Acesso", message: "Deseja salvar o seu acesso?", preferredStyle: .alert)
+        
+        let saveAction = UIAlertAction(title: "Salvar", style: .default) { _ in
+            let user = User(email: userNameLogin, isUserSaved: true)
+            UserDefaultMenager.saveUser(user: user)
+            self.debugUserDefaults()
+            self.loginFlowDelegate?.navigateToHome()
+        }
+        
+        let cancelAction = UIAlertAction(title: "Cancelar", style: .cancel) { _ in
+            self.loginFlowDelegate?.navigateToHome()
+        }
+        
+        alertController.addAction(saveAction)
+        alertController.addAction(cancelAction)
+        self.present(alertController, animated: true)
+    }
+    
+    // Função para descobrir quais chaves foram salvas no UserDefault com filtro de chave padrão "app_" aplicado
+    private func debugUserDefaults() {
+        let allDefaults = UserDefaults.standard.dictionaryRepresentation()
+        let customKeys = allDefaults.keys.filter { $0.hasPrefix("app_") }
+        
+        print("Debug - UserDefaults Com Filtro Aplicado: app_")
+        for key in customKeys {
+            if let value = allDefaults[key] {
+                // Tenta converter valores que estão em Data
+                if let dataValue = value as? Data,
+                   let decodedString = String(data: dataValue, encoding: .utf8) {
+                    print("Chave: \(key), Valor: \(decodedString)")
+                } else {
+                    // Caso não consiga imprime da forma padrão
+                    print("Chave: \(key), Valor: \(value)")
+                }
+            }
         }
     }
 }

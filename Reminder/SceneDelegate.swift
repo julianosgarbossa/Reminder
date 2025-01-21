@@ -10,15 +10,15 @@ import UIKit
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
-    var reminderCoordinator: ReminderFlowController?
+    var reminderFlowController: ReminderFlowController?
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         
         let window = UIWindow(windowScene: windowScene)
         
-        reminderCoordinator = ReminderFlowController()
-        let rootViewController = reminderCoordinator?.start()
+        reminderFlowController = ReminderFlowController()
+        let rootViewController = reminderFlowController?.start()
         
         window.rootViewController = rootViewController
         self.window = window

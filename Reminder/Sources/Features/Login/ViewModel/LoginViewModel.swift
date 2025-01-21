@@ -9,7 +9,7 @@ import Foundation
 import FirebaseAuth
 
 class LoginViewModel {
-    var sucessResult: (() -> Void)?
+    var sucessResult: ((String) -> Void)?
     
     func doAuth(userNameLogin: String, password: String) {
         // vai fazer a requisição ou chamar a camada de serviço
@@ -17,7 +17,7 @@ class LoginViewModel {
             if let error {
                 print("autenticação falhou: \(error.localizedDescription)")
             } else {
-                self?.sucessResult?()
+                self?.sucessResult?(userNameLogin)
                 print("sucesso na autenticação: \(String(describing: result))")
             }
         }

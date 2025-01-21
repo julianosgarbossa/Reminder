@@ -9,7 +9,7 @@ import UIKit
 
 class SplashViewController: UIViewController {
 
-    private let contentView = SplashView()
+    private let splashView: SplashView
     public weak var splashFlowDelegate: SplashFlowDelegate?
     
     override func viewDidLoad() {
@@ -20,9 +20,10 @@ class SplashViewController: UIViewController {
         self.setVisualElements()
     }
     
-    init(splashFlowDelegate: SplashFlowDelegate?) {
-        super.init(nibName: nil, bundle: nil)
+    init(splashView: SplashView, splashFlowDelegate: SplashFlowDelegate?) {
+        self.splashView = splashView
         self.splashFlowDelegate = splashFlowDelegate
+        super.init(nibName: nil, bundle: nil)
     }
     
     required init?(coder: NSCoder) {
@@ -30,20 +31,20 @@ class SplashViewController: UIViewController {
     }
     
     private func setVisualElements() {
-        self.view.addSubview(contentView)
-        self.navigationController?.navigationBar.isHidden = true
+        self.view.addSubview(splashView)
+        self.navigationController?.navigationBar.isHidden = false
         
         self.setConstraints()
     }
     
     private func setConstraints() {
-        contentView.translatesAutoresizingMaskIntoConstraints = false
+        splashView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            contentView.topAnchor.constraint(equalTo: self.view.topAnchor),
-            contentView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
-            contentView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
-            contentView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor),
+            splashView.topAnchor.constraint(equalTo: self.view.topAnchor),
+            splashView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
+            splashView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
+            splashView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor),
         ])
     }
     
