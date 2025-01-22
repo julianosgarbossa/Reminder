@@ -9,7 +9,7 @@ import UIKit
 
 class SplashView: UIView {
 
-    private let logoImageView: UIImageView = {
+    public let logoImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.image = UIImage(named: "Logo")

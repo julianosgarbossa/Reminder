@@ -74,9 +74,10 @@ class LoginViewController: UIViewController {
         loginViewModel.sucessResult = { [weak self] result in
             // chamar a próxima tela de menu com sucesso
             self?.presentSaveLoginAlert(userNameLogin: result)
-//            self?.loginFlowDelegate?.navigateToHome()
-            print("chegou na viewController")
-            // com erro, mostrar o erro para o usuário
+        }
+        
+        loginViewModel.errorResult = { [weak self] error in
+            self?.presentErrorAlert(message: error)
         }
     }
     
@@ -86,11 +87,12 @@ class LoginViewController: UIViewController {
         let saveAction = UIAlertAction(title: "Salvar", style: .default) { _ in
             let user = User(email: userNameLogin, isUserSaved: true)
             UserDefaultMenager.saveUser(user: user)
-            self.debugUserDefaults()
             self.loginFlowDelegate?.navigateToHome()
         }
         
         let cancelAction = UIAlertAction(title: "Cancelar", style: .cancel) { _ in
+            let user = User(email: userNameLogin, isUserSaved: false)
+            UserDefaultMenager.saveUser(user: user)
             self.loginFlowDelegate?.navigateToHome()
         }
         
@@ -99,24 +101,11 @@ class LoginViewController: UIViewController {
         self.present(alertController, animated: true)
     }
     
-    // Função para descobrir quais chaves foram salvas no UserDefault com filtro de chave padrão "app_" aplicado
-    private func debugUserDefaults() {
-        let allDefaults = UserDefaults.standard.dictionaryRepresentation()
-        let customKeys = allDefaults.keys.filter { $0.hasPrefix("app_") }
-        
-        print("Debug - UserDefaults Com Filtro Aplicado: app_")
-        for key in customKeys {
-            if let value = allDefaults[key] {
-                // Tenta converter valores que estão em Data
-                if let dataValue = value as? Data,
-                   let decodedString = String(data: dataValue, encoding: .utf8) {
-                    print("Chave: \(key), Valor: \(decodedString)")
-                } else {
-                    // Caso não consiga imprime da forma padrão
-                    print("Chave: \(key), Valor: \(value)")
-                }
-            }
-        }
+    private func presentErrorAlert(message: String) {
+        let alertController = UIAlertController(title: "Erro", message: message, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "OK", style: .default)
+        alertController.addAction(okAction)
+        self.present(alertController, animated: true)
     }
 }
 
