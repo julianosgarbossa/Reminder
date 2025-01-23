@@ -87,13 +87,13 @@ class LoginViewController: UIViewController {
         let saveAction = UIAlertAction(title: "Salvar", style: .default) { _ in
             let user = User(email: userNameLogin, isUserSaved: true)
             UserDefaultMenager.saveUser(user: user)
-            self.loginFlowDelegate?.navigateToHome()
+            self.loginFlowDelegate?.AutomaticNavigateToHome()
         }
         
         let cancelAction = UIAlertAction(title: "Cancelar", style: .cancel) { _ in
             let user = User(email: userNameLogin, isUserSaved: false)
             UserDefaultMenager.saveUser(user: user)
-            self.loginFlowDelegate?.navigateToHome()
+            self.loginFlowDelegate?.AutomaticNavigateToHome()
         }
         
         alertController.addAction(saveAction)

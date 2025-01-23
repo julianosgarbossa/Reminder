@@ -19,7 +19,7 @@ class ReminderFlowController {
     
     // MARK: startFlow
     func start() -> UINavigationController? {
-        let startViewController = viewControllerFactory.makeSplashViewController(flowDelegate: self)
+        let startViewController = viewControllerFactory.makeSplashViewController(splashFlowDelegate: self)
         self.navigationController = UINavigationController(rootViewController: startViewController)
         return self.navigationController
     }
@@ -28,14 +28,13 @@ class ReminderFlowController {
 // MARK: Splash
 extension ReminderFlowController: SplashFlowDelegate {
     
-    func nagigateToHome() {
-        let viewController = UIViewController()
-        viewController.view.backgroundColor = Colors.redBase
-        self.navigationController?.pushViewController(viewController, animated: true)
+    func AutomaticNavigateToHome() {
+        let homeViewController = viewControllerFactory.makeHomeViewController(homeFlowDelegate: self)
+        self.navigationController?.pushViewController(homeViewController, animated: true)
     }
     
     func openLogin() {
-        let loginViewController = viewControllerFactory.makeLoginViewController(flowDelegate: self)
+        let loginViewController = viewControllerFactory.makeLoginViewController(loginFlowDelegate: self)
         loginViewController.modalPresentationStyle = .overCurrentContext
         loginViewController.modalTransitionStyle = .crossDissolve
         self.navigationController?.present(loginViewController, animated: false) {
@@ -48,8 +47,12 @@ extension ReminderFlowController: SplashFlowDelegate {
 extension ReminderFlowController: LoginFlowDelegate {
     func navigateToHome() {
         self.navigationController?.dismiss(animated: false)
-        let viewController = UIViewController()
-        viewController.view.backgroundColor = Colors.redBase
-        self.navigationController?.pushViewController(viewController, animated: true)
+        let homeViewController = viewControllerFactory.makeHomeViewController(homeFlowDelegate: self)
+        self.navigationController?.pushViewController(homeViewController, animated: true)
     }
+}
+
+// MARK: Home
+extension ReminderFlowController: HomeFlowDelegate {
+    
 }

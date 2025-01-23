@@ -12,9 +12,16 @@
 "login.email.placeholder" = "email@exemplo.com";
 "login.password.title" = "Senha";
 "login.password.placeholder" = "senha";
+"login.textfield.eye.icon" = "eye";
+"login.textfield.eye.slash.icon" = "eye.slash";
 "login.button.title" = "Entrar";
 
 /* MARK: - HOME SCREEN */
+"home.image.avatar" = "Avatar";
+"home.label.welcome" = "Boas vindas";
+"home.label.name" = "Juliano Sgarbossa";
+"home.button.feedback" = "  Avaliar";
+"home.button.feedback.icon" = "star";
 
 /* MARK: - RECEIPTS SCREEN */
 

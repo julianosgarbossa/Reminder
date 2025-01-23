@@ -71,14 +71,7 @@ class SplashViewController: UIViewController {
     }
     
     private func setConstraints() {
-        splashView.translatesAutoresizingMaskIntoConstraints = false
-        
-        NSLayoutConstraint.activate([
-            splashView.topAnchor.constraint(equalTo: self.view.topAnchor),
-            splashView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
-            splashView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
-            splashView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor),
-        ])
+        self.setupContentViewToBounds(contentView: splashView)
     }
     
     private func setGesture() {

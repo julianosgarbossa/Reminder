@@ -8,15 +8,21 @@
 import UIKit
 
 final class ViewControllerFactory: ViewControllerFactoryProtocol {
-    func makeSplashViewController(flowDelegate: SplashFlowDelegate) -> SplashViewController {
+    func makeSplashViewController(splashFlowDelegate: SplashFlowDelegate) -> SplashViewController {
         let splashView = SplashView()
-        let splashViewController = SplashViewController(splashView: splashView, splashFlowDelegate: flowDelegate)
+        let splashViewController = SplashViewController(splashView: splashView, splashFlowDelegate: splashFlowDelegate)
         return splashViewController
     }
     
-    func makeLoginViewController(flowDelegate: LoginFlowDelegate) -> LoginViewController {
+    func makeLoginViewController(loginFlowDelegate: LoginFlowDelegate) -> LoginViewController {
         let loginView = LoginView()
-        let loginViewController = LoginViewController(loginView: loginView, loginFlowDelegate: flowDelegate)
+        let loginViewController = LoginViewController(loginView: loginView, loginFlowDelegate: loginFlowDelegate)
         return loginViewController
+    }
+    
+    func makeHomeViewController(homeFlowDelegate: HomeFlowDelegate) -> HomeViewController {
+        let homeView = HomeView()
+        let homeViewController = HomeViewController(homeView: homeView, homeFlowDelegate: homeFlowDelegate)
+        return homeViewController
     }
 }

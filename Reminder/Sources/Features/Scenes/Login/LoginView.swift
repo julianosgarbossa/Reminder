@@ -10,6 +10,7 @@ import UIKit
 class LoginView: UIView {
     
     public weak var delegate: LoginDelegate?
+    private var passwordIsHide = true
     
     private let handleArea: UIView = {
         let view = UIView()
@@ -73,6 +74,15 @@ class LoginView: UIView {
         return textField
     }()
     
+    private lazy var passwordEyeButton: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setImage(UIImage(systemName: "login.textfield.eye.slash.icon".localized), for: .normal)
+        button.tintColor = Colors.blueBase
+        button.addTarget(self, action: #selector(passwordEyeButtonDidTapped), for: .touchUpInside)
+        return button
+    }()
+    
     private lazy var loginButton: UIButton = {
         let button = UIButton(type: .system)
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -104,6 +114,17 @@ class LoginView: UIView {
         print("clicou na label")
     }
     
+    @objc
+    private func passwordEyeButtonDidTapped() {
+        passwordIsHide.toggle()
+        if passwordIsHide {
+            self.passwordEyeButton.setImage(UIImage(systemName: "login.textfield.eye.slash.icon".localized), for: .normal)
+            self.passwordTextField.isSecureTextEntry = true
+        } else {
+            self.passwordEyeButton.setImage(UIImage(systemName: "login.textfield.eye.icon".localized), for: .normal)
+            self.passwordTextField.isSecureTextEntry = false
+        }
+    }
     
     @objc
     private func loginButtonDidTapped() {
@@ -119,6 +140,7 @@ class LoginView: UIView {
         self.addSubview(emailTextField)
         self.addSubview(passwordLabel)
         self.addSubview(passwordTextField)
+        self.addSubview(passwordEyeButton)
         self.addSubview(loginButton)
         
         self.setConstraints()
@@ -154,9 +176,14 @@ class LoginView: UIView {
             passwordTextField.trailingAnchor.constraint(equalTo: titleLabel.trailingAnchor),
             passwordTextField.heightAnchor.constraint(equalToConstant: Metrics.inputSize),
             
-            loginButton.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor, constant: Metrics.hugeSmall),
+            passwordEyeButton.centerYAnchor.constraint(equalTo: passwordTextField.centerYAnchor),
+            passwordEyeButton.leadingAnchor.constraint(equalTo: passwordTextField.trailingAnchor, constant: -Metrics.hugeSmall),
+            passwordEyeButton.widthAnchor.constraint(equalToConstant: Metrics.medium),
+            passwordEyeButton.heightAnchor.constraint(equalToConstant: Metrics.medium),
+            
             loginButton.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor),
             loginButton.trailingAnchor.constraint(equalTo: titleLabel.trailingAnchor),
+            loginButton.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor, constant: -Metrics.smallLarge),
             loginButton.heightAnchor.constraint(equalToConstant: Metrics.buttonSize),
         ])
     }
