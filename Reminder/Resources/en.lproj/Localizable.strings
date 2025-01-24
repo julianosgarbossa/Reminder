@@ -17,7 +17,8 @@
 "login.button.title" = "Entrar";
 
 /* MARK: - HOME SCREEN */
-"home.image.avatar" = "Avatar";
+"home.button.logout.icon" = "logout";
+"home.image.avatar" = "AvatarDefault";
 "home.label.welcome" = "Boas vindas";
 "home.label.name" = "Juliano Sgarbossa";
 "home.button.feedback" = "  Avaliar";

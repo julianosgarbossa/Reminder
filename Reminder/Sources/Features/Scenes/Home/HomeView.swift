@@ -9,6 +9,8 @@ import UIKit
 
 class HomeView: UIView {
     
+    public weak var delegate: HomeDelegate?
+    
     let profileBackground: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -16,12 +18,13 @@ class HomeView: UIView {
         return view
     }()
     
-    let profileImage: UIImageView = {
+    public lazy var profileImage: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFit
-        imageView.layer.cornerRadius = 35
+        imageView.layer.cornerRadius = Metrics.medium
         imageView.clipsToBounds = true
+        imageView.isUserInteractionEnabled = true
         imageView.image = UIImage(named: "home.image.avatar".localized)
         return imageView
     }()
@@ -30,7 +33,7 @@ class HomeView: UIView {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = Colors.gray200
-        label.font = Typography.label
+        label.font = Typography.input
         label.text = "home.label.welcome".localized
         return label
     }()
@@ -83,6 +86,8 @@ class HomeView: UIView {
         self.profileBackground.addSubview(viewBackground)
         self.profileBackground.addSubview(feedbackButton)
         
+        self.setImageGesture()
+        
         self.setConstraints()
     }
     
@@ -94,7 +99,7 @@ class HomeView: UIView {
             profileBackground.trailingAnchor.constraint(equalTo: self.trailingAnchor),
             profileBackground.bottomAnchor.constraint(equalTo: self.bottomAnchor),
             
-            profileImage.topAnchor.constraint(equalTo: profileBackground.safeAreaLayoutGuide.topAnchor, constant: Metrics.mediumLarge),
+            profileImage.topAnchor.constraint(equalTo: profileBackground.safeAreaLayoutGuide.topAnchor),
             profileImage.leadingAnchor.constraint(equalTo: profileBackground.leadingAnchor, constant: Metrics.mediumLarge),
             profileImage.widthAnchor.constraint(equalToConstant: Metrics.mediumLarge * 2),
             profileImage.heightAnchor.constraint(equalToConstant: Metrics.mediumLarge * 2),
@@ -117,5 +122,15 @@ class HomeView: UIView {
             feedbackButton.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor, constant: -Metrics.smallLarge),
             feedbackButton.heightAnchor.constraint(equalToConstant: Metrics.buttonSize),
         ])
+    }
+    
+    private func setImageGesture() {
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(profileImageTapped))
+        profileImage.addGestureRecognizer(tapGestureRecognizer)
+    }
+    
+    @objc
+    private func profileImageTapped() {
+        self.delegate?.didTapProfileImage()
     }
 }

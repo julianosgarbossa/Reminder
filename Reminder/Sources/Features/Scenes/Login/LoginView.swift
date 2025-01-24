@@ -50,6 +50,8 @@ class LoginView: UIView {
         textField.textColor = Colors.gray200
         textField.backgroundColor = Colors.gray800
         textField.layer.cornerRadius = Metrics.tiny
+        textField.keyboardType = .emailAddress
+        textField.autocapitalizationType = .none
         return textField
     }()
     
@@ -69,6 +71,7 @@ class LoginView: UIView {
         textField.placeholder = "login.password.placeholder".localized
         textField.isSecureTextEntry = true
         textField.borderStyle = .roundedRect
+        textField.font = Typography.input
         textField.backgroundColor = Colors.gray800
         textField.layer.cornerRadius = Metrics.tiny
         return textField

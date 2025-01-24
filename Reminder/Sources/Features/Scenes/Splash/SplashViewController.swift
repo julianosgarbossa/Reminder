@@ -11,6 +11,7 @@ class SplashViewController: UIViewController {
 
     private let splashView: SplashView
     public weak var splashFlowDelegate: SplashFlowDelegate?
+    private var isLogoAnimated = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -58,6 +59,13 @@ class SplashViewController: UIViewController {
     private func decideNavigationFlow() {
         if let user = UserDefaultMenager.loadUser(), user.isUserSaved {
             splashFlowDelegate?.navigateToHome()
+            // Delay adicionado antes da animação
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) { // 1.0 = 1 segundo de atraso
+                if !self.isLogoAnimated {
+                    self.isLogoAnimated = true
+                    self.animateLogoUp()
+                }
+            }
         } else {
             self.showLogin()
         }
@@ -81,7 +89,11 @@ class SplashViewController: UIViewController {
     
     @objc
     private func showLogin() {
-        animateLogoUp()
+        if !isLogoAnimated {
+            isLogoAnimated = true
+            animateLogoUp()
+        }
+        
         self.splashFlowDelegate?.openLogin()
     }
 }

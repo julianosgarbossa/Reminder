@@ -29,6 +29,7 @@ class ReminderFlowController {
 extension ReminderFlowController: SplashFlowDelegate {
     
     func AutomaticNavigateToHome() {
+        self.navigationController?.presentedViewController?.dismiss(animated: false)
         let homeViewController = viewControllerFactory.makeHomeViewController(homeFlowDelegate: self)
         self.navigationController?.pushViewController(homeViewController, animated: true)
     }
@@ -46,7 +47,7 @@ extension ReminderFlowController: SplashFlowDelegate {
 // MARK: Login
 extension ReminderFlowController: LoginFlowDelegate {
     func navigateToHome() {
-        self.navigationController?.dismiss(animated: false)
+        self.navigationController?.presentedViewController?.dismiss(animated: false)
         let homeViewController = viewControllerFactory.makeHomeViewController(homeFlowDelegate: self)
         self.navigationController?.pushViewController(homeViewController, animated: true)
     }
@@ -54,5 +55,12 @@ extension ReminderFlowController: LoginFlowDelegate {
 
 // MARK: Home
 extension ReminderFlowController: HomeFlowDelegate {
+    func navigateToRecipes() {
+        
+    }
     
+    func logout() {
+        self.navigationController?.popViewController(animated: false)
+        self.openLogin()
+    }
 }

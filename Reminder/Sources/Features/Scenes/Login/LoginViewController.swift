@@ -46,7 +46,6 @@ class LoginViewController: UIViewController {
             loginView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor),
         ])
         
-//        let heighConstraint =
         loginView.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.5).isActive = true
         
     }
