@@ -38,13 +38,14 @@ class HomeView: UIView {
         return label
     }()
     
-    let nameLabel: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.textColor = Colors.gray100
-        label.font = Typography.heading
-        label.text = "home.label.name".localized
-        return label
+    let nameTextField: UITextField = {
+        let textField = UITextField()
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        textField.textColor = Colors.gray100
+        textField.font = Typography.heading
+        textField.placeholder = "home.textfield.placeholder".localized
+        textField.returnKeyType = .done
+        return textField
     }()
     
     let viewBackground: UIView = {
@@ -82,7 +83,7 @@ class HomeView: UIView {
         self.addSubview(profileBackground)
         self.profileBackground.addSubview(profileImage)
         self.profileBackground.addSubview(welcomeLabel)
-        self.profileBackground.addSubview(nameLabel)
+        self.profileBackground.addSubview(nameTextField)
         self.profileBackground.addSubview(viewBackground)
         self.profileBackground.addSubview(feedbackButton)
         
@@ -108,11 +109,12 @@ class HomeView: UIView {
             welcomeLabel.leadingAnchor.constraint(equalTo: profileImage.leadingAnchor),
             welcomeLabel.trailingAnchor.constraint(equalTo: profileBackground.trailingAnchor ,constant: -Metrics.mediumLarge),
             
-            nameLabel.topAnchor.constraint(equalTo: welcomeLabel.bottomAnchor, constant: Metrics.little),
-            nameLabel.leadingAnchor.constraint(equalTo: welcomeLabel.leadingAnchor),
-            nameLabel.trailingAnchor.constraint(equalTo: welcomeLabel.trailingAnchor),
+            nameTextField.topAnchor.constraint(equalTo: welcomeLabel.bottomAnchor, constant: Metrics.little),
+            nameTextField.leadingAnchor.constraint(equalTo: welcomeLabel.leadingAnchor),
+            nameTextField.trailingAnchor.constraint(equalTo: welcomeLabel.trailingAnchor),
+            nameTextField.heightAnchor.constraint(equalToConstant: Metrics.medium),
             
-            viewBackground.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: Metrics.mediumLarge),
+            viewBackground.topAnchor.constraint(equalTo: nameTextField.bottomAnchor, constant: Metrics.mediumLarge),
             viewBackground.leadingAnchor.constraint(equalTo: profileBackground.leadingAnchor),
             viewBackground.trailingAnchor.constraint(equalTo: profileBackground.trailingAnchor),
             viewBackground.bottomAnchor.constraint(equalTo: profileBackground.bottomAnchor),

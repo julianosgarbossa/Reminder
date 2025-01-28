@@ -44,10 +44,8 @@ class LoginViewController: UIViewController {
             loginView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
             loginView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
             loginView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor),
+            loginView.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.5),
         ])
-        
-        loginView.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.5).isActive = true
-        
     }
     
     private func setGesture() {

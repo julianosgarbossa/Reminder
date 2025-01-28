@@ -104,6 +104,7 @@ class LoginView: UIView {
         self.backgroundColor = Colors.gray800
         self.layer.cornerRadius = Metrics.medium
         
+        // Nada funcional, apenas para estudo
         let exempleGest = UITapGestureRecognizer(target: self, action: #selector(exempleTaped))
         titleLabel.addGestureRecognizer(exempleGest)
     }
@@ -114,6 +115,7 @@ class LoginView: UIView {
     
     @objc
     private func exempleTaped() {
+        // Apenas para estudo
         print("clicou na label")
     }
     

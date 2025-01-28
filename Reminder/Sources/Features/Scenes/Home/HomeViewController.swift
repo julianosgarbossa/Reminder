@@ -10,12 +10,13 @@ import UIKit
 class HomeViewController: UIViewController {
     
     private let homeView: HomeView
-    private let homeViewModel = HomeViewModel()
+    private let homeViewModel: HomeViewModel
     public weak var homeFlowDelegate: HomeFlowDelegate?
 
     init(homeView: HomeView, homeFlowDelegate: HomeFlowDelegate) {
         self.homeView = homeView
         self.homeFlowDelegate = homeFlowDelegate
+        self.homeViewModel = HomeViewModel()
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -26,8 +27,9 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.homeView.delegate = self
+        self.homeView.nameTextField.delegate = self
         self.setVisualElements()
-        
+        self.checkForExistingData()
     }
     
     private func setVisualElements() {
@@ -51,6 +53,17 @@ class HomeViewController: UIViewController {
                                            action: #selector(logoutAction))
         logoutButton.tintColor = Colors.redBase
         navigationItem.rightBarButtonItem = logoutButton
+    }
+    
+    private func checkForExistingData() {
+        if let userName = UserDefaultMenager.loadUserName() {
+            self.homeView.nameTextField.text = userName
+        }
+    }
+    
+    private func saveUserName() {
+        let userName = self.homeView.nameTextField.text ?? ""
+        UserDefaultMenager.saveUserName(name: userName)
     }
     
     @objc
@@ -87,5 +100,13 @@ extension HomeViewController: UIImagePickerControllerDelegate, UINavigationContr
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         dismiss(animated: true)
+    }
+}
+
+extension HomeViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        self.saveUserName()
+        return true
     }
 }
