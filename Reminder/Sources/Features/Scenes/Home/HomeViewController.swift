@@ -30,6 +30,7 @@ class HomeViewController: UIViewController {
         self.homeView.nameTextField.delegate = self
         self.setVisualElements()
         self.checkForExistingData()
+        self.addDismissKeyboardGesture() // Adiciona o gesto para fechar o teclado
     }
     
     private func setVisualElements() {
@@ -64,6 +65,17 @@ class HomeViewController: UIViewController {
     private func saveUserName() {
         let userName = self.homeView.nameTextField.text ?? ""
         UserDefaultMenager.saveUserName(name: userName)
+    }
+    
+    private func addDismissKeyboardGesture() {
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        tapGesture.cancelsTouchesInView = false // Permite que outros toques continuem funcionando
+        self.view.addGestureRecognizer(tapGesture)
+    }
+
+    @objc
+    private func dismissKeyboard() {
+        self.view.endEditing(true) // Fecha o teclado e dispara textFieldDidEndEditing
     }
     
     @objc
@@ -108,5 +120,9 @@ extension HomeViewController: UITextFieldDelegate {
         textField.resignFirstResponder()
         self.saveUserName()
         return true
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        self.saveUserName()
     }
 }
