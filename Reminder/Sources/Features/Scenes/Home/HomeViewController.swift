@@ -11,7 +11,7 @@ class HomeViewController: UIViewController {
     
     private let homeView: HomeView
     private let homeViewModel: HomeViewModel
-    public weak var homeFlowDelegate: HomeFlowDelegate?
+    private weak var homeFlowDelegate: HomeFlowDelegate?
 
     init(homeView: HomeView, homeFlowDelegate: HomeFlowDelegate) {
         self.homeView = homeView
@@ -57,8 +57,16 @@ class HomeViewController: UIViewController {
     }
     
     private func checkForExistingData() {
-        if let userName = UserDefaultMenager.loadUserName() {
-            self.homeView.nameTextField.text = userName
+        // Verifica se o usuário está salvo
+        if UserDefaultMenager.loadUser() != nil {
+            self.homeView.nameTextField.text = UserDefaultMenager.loadUserName()
+        }
+        
+        // Verifica se a imagem de perfil está salva
+        if let saveImage = UserDefaultMenager.loadProfileImage() {
+            self.homeView.profileImage.image = saveImage
+        } else {
+            self.homeView.profileImage.image = UIImage(named: "home.image.avatar".localized)
         }
     }
     
@@ -104,8 +112,10 @@ extension HomeViewController: UIImagePickerControllerDelegate, UINavigationContr
     internal func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let editImage = info[.editedImage] as? UIImage {
             self.homeView.profileImage.image = editImage
+            UserDefaultMenager.saveProfileImage(image: editImage)
         } else if let originalImage = info[.originalImage] as? UIImage {
             self.homeView.profileImage.image = originalImage
+            UserDefaultMenager.saveProfileImage(image: originalImage)
         }
         dismiss(animated: true)
     }

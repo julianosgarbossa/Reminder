@@ -6,10 +6,12 @@
 //
 
 import Foundation
+import UIKit
 
 class UserDefaultMenager {
     private static let userKey = "app_userKey"
     private static let userNameKey = "app_userName"
+    private static let profileImageKey = "app_profileImageKey"
     
     static func saveUser(user: User) {
         let encoder = JSONEncoder()
@@ -22,6 +24,12 @@ class UserDefaultMenager {
     static func saveUserName(name: String) {
         UserDefaults.standard.set(name, forKey: userNameKey)
         UserDefaults.standard.synchronize()
+    }
+    
+    static func saveProfileImage(image: UIImage) {
+        if let imageData = image.jpegData(compressionQuality: 1.0) {
+            UserDefaults.standard.set(imageData, forKey: profileImageKey)
+        }
     }
     
     static func loadUser() -> User? {
@@ -38,8 +46,17 @@ class UserDefaultMenager {
         return UserDefaults.standard.string(forKey: userNameKey)
     }
     
+    static func loadProfileImage() -> UIImage? {
+        if let imageData = UserDefaults.standard.data(forKey: profileImageKey) {
+            return UIImage(data: imageData)
+        }
+        return nil
+    }
+    
     static func removeUser() {
         UserDefaults.standard.removeObject(forKey: userKey)
+        UserDefaults.standard.removeObject(forKey: userNameKey)
+        UserDefaults.standard.removeObject(forKey: profileImageKey)
         UserDefaults.standard.synchronize()
     }
     

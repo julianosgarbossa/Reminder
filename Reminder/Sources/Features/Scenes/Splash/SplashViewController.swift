@@ -10,7 +10,7 @@ import UIKit
 class SplashViewController: UIViewController {
 
     private let splashView: SplashView
-    public weak var splashFlowDelegate: SplashFlowDelegate?
+    private weak var splashFlowDelegate: SplashFlowDelegate?
     private var isLogoAnimated = false
     
     override func viewDidLoad() {

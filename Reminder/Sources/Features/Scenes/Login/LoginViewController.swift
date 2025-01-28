@@ -11,7 +11,7 @@ class LoginViewController: UIViewController {
     private let loginView: LoginView
     private let loginViewModel = LoginViewModel()
     var handleAreaHeigh: CGFloat = 50.0
-    public weak var loginFlowDelegate: LoginFlowDelegate?
+    private weak var loginFlowDelegate: LoginFlowDelegate?
     
     init(loginView: LoginView, loginFlowDelegate: LoginFlowDelegate) {
         self.loginView = loginView
