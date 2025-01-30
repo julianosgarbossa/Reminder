@@ -57,6 +57,20 @@ class HomeView: UIView {
         return view
     }()
     
+    let myRecipesButton: ButtonHomeView = {
+        let buttonHomeView = ButtonHomeView(icon: UIImage(named: "home.button.myRecipes.image".localized),
+                                            title: "home.button.myRecipes.title".localized,
+                                            description: "home.button.myRecipes.description".localized)
+        return buttonHomeView
+    }()
+    
+    let newRecipeButton: ButtonHomeView = {
+        let buttonHomeView = ButtonHomeView(icon: UIImage(named: "home.button.newRecipe.image".localized),
+                                            title: "home.button.newRecipe.title".localized,
+                                            description: "home.button.newRecipe.description".localized)
+        return buttonHomeView
+    }()
+    
     let feedbackButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -85,6 +99,8 @@ class HomeView: UIView {
         self.profileBackground.addSubview(welcomeLabel)
         self.profileBackground.addSubview(nameTextField)
         self.profileBackground.addSubview(viewBackground)
+        self.viewBackground.addSubview(myRecipesButton)
+        self.viewBackground.addSubview(newRecipeButton)
         self.profileBackground.addSubview(feedbackButton)
         
         self.setImageGesture()
@@ -118,6 +134,14 @@ class HomeView: UIView {
             viewBackground.leadingAnchor.constraint(equalTo: profileBackground.leadingAnchor),
             viewBackground.trailingAnchor.constraint(equalTo: profileBackground.trailingAnchor),
             viewBackground.bottomAnchor.constraint(equalTo: profileBackground.bottomAnchor),
+            
+            myRecipesButton.topAnchor.constraint(equalTo: viewBackground.topAnchor, constant: Metrics.hugeSmall),
+            myRecipesButton.leadingAnchor.constraint(equalTo: viewBackground.leadingAnchor, constant: Metrics.mediumLarge),
+            myRecipesButton.trailingAnchor.constraint(equalTo: viewBackground.trailingAnchor, constant: -Metrics.mediumLarge),
+            
+            newRecipeButton.topAnchor.constraint(equalTo: myRecipesButton.bottomAnchor, constant: Metrics.tiny * 2),
+            newRecipeButton.leadingAnchor.constraint(equalTo: myRecipesButton.leadingAnchor),
+            newRecipeButton.trailingAnchor.constraint(equalTo: myRecipesButton.trailingAnchor),
             
             feedbackButton.leadingAnchor.constraint(equalTo: welcomeLabel.leadingAnchor),
             feedbackButton.trailingAnchor.constraint(equalTo: welcomeLabel.trailingAnchor),

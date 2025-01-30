@@ -19,4 +19,6 @@ public struct Metrics {
     static let little: CGFloat = 4
     static let inputSize: CGFloat = 56
     static let buttonSize: CGFloat = 56
+    static let iconViewWidth: CGFloat = 80
+    static let iconViewHeight: CGFloat = 88
 }

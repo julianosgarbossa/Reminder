@@ -21,8 +21,17 @@
 "home.image.avatar" = "AvatarDefault";
 "home.label.welcome" = "Boas vindas";
 "home.textfield.placeholder" = "Insira seu nome";
+"home.button.myRecipes.image" = "paper";
+"home.button.myRecipes.title" = "Minhas receitas";
+"home.button.myRecipes.description" = "Acompanhe os medicamentos e gerencie lembretes";
+"home.button.newRecipe.image" = "pills";
+"home.button.newRecipe.title" = "Nova receita";
+"home.button.newRecipe.description" = "Cadastre novos lembretes de receitas";
 "home.button.feedback" = "  Avaliar";
 "home.button.feedback.icon" = "star";
+
+/* MARK: - BUTTON HOME SCREEN */
+"buttonHomeView.image.arrow.icon" = "chevron.right";
 
 /* MARK: - RECEIPTS SCREEN */
 
