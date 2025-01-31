@@ -36,5 +36,8 @@
 /* MARK: - RECEIPTS SCREEN */
 
 /* MARK: - NEWRECEIPT SCREEN */
+"newRecipe.button.image" = "arrow.left";
+"newRecipe.label.title" = "Nova receita";
+"newRecipe.label.description" = "Adicione a sua prescrição médica para receber lembretres de quando tomar seu medicamento";
 
 
