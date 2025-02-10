@@ -56,7 +56,8 @@ extension ReminderFlowController: LoginFlowDelegate {
 // MARK: Home
 extension ReminderFlowController: HomeFlowDelegate {
     func navigateToRecipes() {
-        
+        let newRecipeViewController = viewControllerFactory.makeNewRecipeViewController()
+        self.navigationController?.pushViewController(newRecipeViewController, animated: true)
     }
     
     func logout() {

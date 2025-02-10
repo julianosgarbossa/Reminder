@@ -47,7 +47,11 @@
 "newRecipe.inputRemedy.placeholder" = "Nome do medicamento";
 "newRecipe.inputRecurrence.title" = "Recorrência";
 "newRecipe.inputRecurrence.placeholder" = "Selecione";
+"newRecipe.checkboxFalse.image" = "CheckboxFalse";
+"newRecipe.checkboxTrue.image" = "CheckboxTrue";
+"newRecipe.checkbox.title" = "Tomar agora";
 "newRecipe.button.add.icon" = "plus";
+
 
 
 

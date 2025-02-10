@@ -31,6 +31,7 @@ class HomeViewController: UIViewController {
         self.setVisualElements()
         self.checkForExistingData()
         self.addDismissKeyboardGesture() // Adiciona o gesto para fechar o teclado
+        self.setActionNewRecipe()
     }
     
     private func setVisualElements() {
@@ -43,6 +44,12 @@ class HomeViewController: UIViewController {
     
     private func setConstraints() {
         self.setupContentViewToBounds(contentView: homeView)
+    }
+    
+    private func setActionNewRecipe() {
+        self.homeView.newRecipeButton.tapAction = { [weak self] in
+            self?.didTapNewRecipeButton()
+        }
     }
     
     private func setNavigationBar() {
@@ -97,6 +104,10 @@ class HomeViewController: UIViewController {
 extension HomeViewController: HomeDelegate {
     func didTapProfileImage() {
         self.selectProfileImage()
+    }
+    
+    func didTapNewRecipeButton() {
+        homeFlowDelegate?.navigateToRecipes()
     }
 }
 

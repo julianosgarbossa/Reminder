@@ -9,7 +9,7 @@ import UIKit
 
 class NewRecipeView: UIView {
 
-    private let backButton: UIButton = {
+    public let backButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setImage(UIImage(systemName: "newRecipe.button.image".localized), for: .normal)
@@ -57,6 +57,12 @@ class NewRecipeView: UIView {
         return input
     }()
     
+    private let checkBox: CheckboxView = {
+        let checkBox = CheckboxView(title: "newRecipe.checkbox.title".localized)
+        checkBox.translatesAutoresizingMaskIntoConstraints = false
+        return checkBox
+    }()
+    
     private let addButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -86,6 +92,7 @@ class NewRecipeView: UIView {
         self.addSubview(remedyInput)
         self.addSubview(timeInput)
         self.addSubview(recurrenceInput)
+        self.addSubview(checkBox)
         self.addSubview(addButton)
         
         self.setConstraints()
@@ -114,9 +121,12 @@ class NewRecipeView: UIView {
             timeInput.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor),
             timeInput.trailingAnchor.constraint(equalTo: titleLabel.trailingAnchor),
             
-            recurrenceInput.topAnchor.constraint(equalTo: timeInput.bottomAnchor, constant: Metrics.hugeSmall),
+            recurrenceInput.topAnchor.constraint(equalTo: timeInput.bottomAnchor, constant: Metrics.mediumSmall),
             recurrenceInput.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor),
             recurrenceInput.trailingAnchor.constraint(equalTo: titleLabel.trailingAnchor),
+            
+            checkBox.topAnchor.constraint(equalTo: recurrenceInput.bottomAnchor, constant: Metrics.mediumSmall),
+            checkBox.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor),
             
             addButton.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: Metrics.tiny * 2),
             addButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -Metrics.tiny * 2),

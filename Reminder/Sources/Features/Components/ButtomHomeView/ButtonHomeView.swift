@@ -9,6 +9,8 @@ import UIKit
 
 class ButtonHomeView: UIView {
     
+    var tapAction: (() -> Void)?
+    
     private let iconView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -51,6 +53,11 @@ class ButtonHomeView: UIView {
         return imageView
     }()
     
+    @objc
+    private func handleTap() {
+        self.tapAction?()
+    }
+    
     init(icon: UIImage?, title: String, description: String) {
         super.init(frame: .zero)
         self.setClass()
@@ -58,10 +65,17 @@ class ButtonHomeView: UIView {
         self.iconImageView.image = icon
         self.titleLabel.text = title
         self.descriptionLabel.text = description
+        self.setGesture()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    private func setGesture() {
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap))
+        self.addGestureRecognizer(tapGestureRecognizer)
+        self.isUserInteractionEnabled = true
     }
     
     private func setClass() {
