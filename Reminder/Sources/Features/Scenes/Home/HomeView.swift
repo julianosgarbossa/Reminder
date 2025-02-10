@@ -160,3 +160,7 @@ class HomeView: UIView {
         self.delegate?.didTapProfileImage()
     }
 }
+
+#Preview {
+    HomeView()
+}

@@ -49,7 +49,6 @@ class LoginView: UIView {
         textField.borderStyle = .roundedRect
         textField.textColor = Colors.gray200
         textField.backgroundColor = Colors.gray800
-        textField.layer.cornerRadius = Metrics.tiny
         textField.keyboardType = .emailAddress
         textField.autocapitalizationType = .none
         return textField
@@ -73,7 +72,6 @@ class LoginView: UIView {
         textField.borderStyle = .roundedRect
         textField.font = Typography.input
         textField.backgroundColor = Colors.gray800
-        textField.layer.cornerRadius = Metrics.tiny
         return textField
     }()
     
@@ -192,4 +190,8 @@ class LoginView: UIView {
             loginButton.heightAnchor.constraint(equalToConstant: Metrics.buttonSize),
         ])
     }
+}
+
+#Preview {
+    LoginView()
 }

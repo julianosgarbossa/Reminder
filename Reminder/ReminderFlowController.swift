@@ -19,7 +19,7 @@ class ReminderFlowController {
     
     // MARK: startFlow
     func start() -> UINavigationController? {
-        let startViewController = /*viewControllerFactory.makeSplashViewController(splashFlowDelegate: self)*/ NewRecipeViewController()
+        let startViewController = viewControllerFactory.makeSplashViewController(splashFlowDelegate: self)
         self.navigationController = UINavigationController(rootViewController: startViewController)
         return self.navigationController
     }

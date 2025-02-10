@@ -9,7 +9,7 @@ import UIKit
 
 class NewRecipeView: UIView {
 
-    let backButton: UIButton = {
+    private let backButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setImage(UIImage(systemName: "newRecipe.button.image".localized), for: .normal)
@@ -17,7 +17,7 @@ class NewRecipeView: UIView {
         return button
     }()
     
-    let titleLabel: UILabel = {
+    private let titleLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = Typography.heading
@@ -26,7 +26,7 @@ class NewRecipeView: UIView {
         return label
     }()
     
-    let descriptionLabel: UILabel = {
+    private let descriptionLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = Typography.body
@@ -34,6 +34,40 @@ class NewRecipeView: UIView {
         label.text = "newRecipe.label.description".localized
         label.numberOfLines = 0
         return label
+    }()
+    
+    private let remedyInput: InputNewRecipeView = {
+        let input = InputNewRecipeView(title: "newRecipe.inputRemedy.title".localized,
+                                       placeholder: "newRecipe.inputRemedy.placeholder".localized)
+        input.translatesAutoresizingMaskIntoConstraints = false
+        return input
+    }()
+    
+    private let timeInput: InputNewRecipeView = {
+        let input = InputNewRecipeView(title: "newRecipe.inputTime.title".localized,
+                                       placeholder: "newRecipe.inputTime.placeholder".localized)
+        input.translatesAutoresizingMaskIntoConstraints = false
+        return input
+    }()
+    
+    private let recurrenceInput: InputNewRecipeView = {
+        let input = InputNewRecipeView(title: "newRecipe.inputRecurrence.title".localized,
+                                       placeholder: "newRecipe.inputRecurrence.placeholder".localized)
+        input.translatesAutoresizingMaskIntoConstraints = false
+        return input
+    }()
+    
+    private let addButton: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.backgroundColor = Colors.redBase
+        button.titleLabel?.textColor = Colors.gray800
+        button.layer.cornerRadius = Metrics.medium
+        button.titleLabel?.font = Typography.subHeading
+        button.setTitle( "newRecipe.button.add".localized, for: .normal)
+        button.setImage(UIImage(named: "newRecipe.button.add.icon".localized), for: .normal)
+        button.tintColor = Colors.gray800
+        return button
     }()
     
     override init(frame: CGRect) {
@@ -49,6 +83,10 @@ class NewRecipeView: UIView {
         self.addSubview(backButton)
         self.addSubview(titleLabel)
         self.addSubview(descriptionLabel)
+        self.addSubview(remedyInput)
+        self.addSubview(timeInput)
+        self.addSubview(recurrenceInput)
+        self.addSubview(addButton)
         
         self.setConstraints()
     }
@@ -67,6 +105,27 @@ class NewRecipeView: UIView {
             descriptionLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: Metrics.tiny),
             descriptionLabel.leadingAnchor.constraint(equalTo: backButton.leadingAnchor),
             descriptionLabel.trailingAnchor.constraint(equalTo: titleLabel.trailingAnchor),
+            
+            remedyInput.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: Metrics.hugeSmall),
+            remedyInput.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor),
+            remedyInput.trailingAnchor.constraint(equalTo: titleLabel.trailingAnchor),
+            
+            timeInput.topAnchor.constraint(equalTo: remedyInput.bottomAnchor, constant: Metrics.mediumSmall),
+            timeInput.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor),
+            timeInput.trailingAnchor.constraint(equalTo: titleLabel.trailingAnchor),
+            
+            recurrenceInput.topAnchor.constraint(equalTo: timeInput.bottomAnchor, constant: Metrics.hugeSmall),
+            recurrenceInput.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor),
+            recurrenceInput.trailingAnchor.constraint(equalTo: titleLabel.trailingAnchor),
+            
+            addButton.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: Metrics.tiny * 2),
+            addButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -Metrics.tiny * 2),
+            addButton.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor, constant: -Metrics.smallLarge),
+            addButton.heightAnchor.constraint(equalToConstant: Metrics.buttonSize),
         ])
     }
+}
+
+#Preview {
+    NewRecipeView()
 }

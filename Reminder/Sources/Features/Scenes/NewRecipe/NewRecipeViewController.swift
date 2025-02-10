@@ -18,9 +18,9 @@ class NewRecipeViewController: UIViewController {
     }
     
     private func setVisualElements() {
+        self.view.addSubview(newRecipeView)
         
         self.view.backgroundColor = Colors.gray800
-        self.view.addSubview(newRecipeView)
         self.navigationController?.navigationBar.isHidden = true
         
         self.setConstrains()

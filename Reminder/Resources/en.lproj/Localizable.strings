@@ -39,5 +39,15 @@
 "newRecipe.button.image" = "arrow.left";
 "newRecipe.label.title" = "Nova receita";
 "newRecipe.label.description" = "Adicione a sua prescrição médica para receber lembretres de quando tomar seu medicamento";
+"newRecipe.button.add" = "  Adicionar";
+"newRecipe.inputRemedy.title" = "Remédio";
+"newRecipe.inputRemedy.placeholder" = "Nome do medicamento";
+"newRecipe.inputTime.title" = "Horário";
+"newRecipe.inputTime.placeholder" = "00:00";
+"newRecipe.inputRemedy.placeholder" = "Nome do medicamento";
+"newRecipe.inputRecurrence.title" = "Recorrência";
+"newRecipe.inputRecurrence.placeholder" = "Selecione";
+"newRecipe.button.add.icon" = "plus";
+
 
 
