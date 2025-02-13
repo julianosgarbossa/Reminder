@@ -20,6 +20,8 @@ class DBHelper {
     private func openDatabase() {
         let fileURL = try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false).appendingPathComponent("reminder.sqlite")
         
+        print("CAMINHO: \(fileURL)")
+        
         if sqlite3_open(fileURL.path, &db) != SQLITE_OK {
             print("Erro ao abrir o banco e dados")
             return

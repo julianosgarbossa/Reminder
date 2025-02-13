@@ -10,6 +10,7 @@ import UIKit
 class NewRecipeViewController: UIViewController {
     
     private let newRecipeView: NewRecipeView
+    private let newRecipeViewModel = NewRecipeViewModel()
     
     init(newRecipeView: NewRecipeView) {
         self.newRecipeView = newRecipeView
@@ -47,10 +48,24 @@ class NewRecipeViewController: UIViewController {
     
     private func setActions() {
         self.newRecipeView.backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
+        self.newRecipeView.addButton.addTarget(self, action: #selector(addButtonTapped), for: .touchUpInside)
     }
     
     @objc
     private func backButtonTapped(_ sender: UIButton) {
         self.navigationController?.popViewController(animated: true)
+    }
+    
+    @objc
+    private func addButtonTapped(_ sender: UIButton) {
+        let remedy = newRecipeView.remedyInput.getText()
+        let time = newRecipeView.timeInput.getText()
+        let recurrence = newRecipeView.recurrenceInput.getText()
+        let takeNow = false
+        self.newRecipeViewModel.addRecipe(remedy: remedy,
+                                          time: time,
+                                          recurrence: recurrence,
+                                          takeNow: takeNow)
+        print("Receita \(remedy) adicionda")
     }
 }

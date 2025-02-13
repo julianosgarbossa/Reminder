@@ -36,34 +36,34 @@ class NewRecipeView: UIView {
         return label
     }()
     
-    private let remedyInput: InputNewRecipeView = {
+    let remedyInput: InputNewRecipeView = {
         let input = InputNewRecipeView(title: "newRecipe.inputRemedy.title".localized,
                                        placeholder: "newRecipe.inputRemedy.placeholder".localized)
         input.translatesAutoresizingMaskIntoConstraints = false
         return input
     }()
     
-    private let timeInput: InputNewRecipeView = {
+    let timeInput: InputNewRecipeView = {
         let input = InputNewRecipeView(title: "newRecipe.inputTime.title".localized,
                                        placeholder: "newRecipe.inputTime.placeholder".localized)
         input.translatesAutoresizingMaskIntoConstraints = false
         return input
     }()
     
-    private let recurrenceInput: InputNewRecipeView = {
+    let recurrenceInput: InputNewRecipeView = {
         let input = InputNewRecipeView(title: "newRecipe.inputRecurrence.title".localized,
                                        placeholder: "newRecipe.inputRecurrence.placeholder".localized)
         input.translatesAutoresizingMaskIntoConstraints = false
         return input
     }()
     
-    private let checkBox: CheckboxView = {
+    let checkBox: CheckboxView = {
         let checkBox = CheckboxView(title: "newRecipe.checkbox.title".localized)
         checkBox.translatesAutoresizingMaskIntoConstraints = false
         return checkBox
     }()
     
-    private let addButton: UIButton = {
+    let addButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.backgroundColor = Colors.redBase
