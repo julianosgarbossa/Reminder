@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		3ACFE0D12D3ECFEC00B860D1 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 3ACFE0D02D3ECFEC00B860D1 /* FirebaseAuth */; };
+		3AE1F9D92D5D10370087577F /* SQLite in Frameworks */ = {isa = PBXBuildFile; productRef = 3AE1F9D82D5D10370087577F /* SQLite */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +41,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3AE1F9D92D5D10370087577F /* SQLite in Frameworks */,
 				3ACFE0D12D3ECFEC00B860D1 /* FirebaseAuth in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -84,6 +86,7 @@
 			name = Reminder;
 			packageProductDependencies = (
 				3ACFE0D02D3ECFEC00B860D1 /* FirebaseAuth */,
+				3AE1F9D82D5D10370087577F /* SQLite */,
 			);
 			productName = Reminder;
 			productReference = 3A10575B2D11FDB1009A4066 /* Reminder.app */;
@@ -116,6 +119,7 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				3ACFE0CF2D3ECFEC00B860D1 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				3AE1F9D72D5D10370087577F /* XCRemoteSwiftPackageReference "SQLite.swift" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 3A10575C2D11FDB1009A4066 /* Products */;
@@ -365,6 +369,14 @@
 				minimumVersion = 11.7.0;
 			};
 		};
+		3AE1F9D72D5D10370087577F /* XCRemoteSwiftPackageReference "SQLite.swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/stephencelis/SQLite.swift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.15.3;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -372,6 +384,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 3ACFE0CF2D3ECFEC00B860D1 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseAuth;
+		};
+		3AE1F9D82D5D10370087577F /* SQLite */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3AE1F9D72D5D10370087577F /* XCRemoteSwiftPackageReference "SQLite.swift" */;
+			productName = SQLite;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
