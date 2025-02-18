@@ -50,12 +50,36 @@ class NewRecipeView: UIView {
         return input
     }()
     
+    let timePicker: UIDatePicker = {
+        let picker = UIDatePicker()
+        picker.translatesAutoresizingMaskIntoConstraints = false
+        picker.datePickerMode = .time
+        picker.preferredDatePickerStyle = .wheels
+        return picker
+    }()
+    
     let recurrenceInput: InputNewRecipeView = {
         let input = InputNewRecipeView(title: "newRecipe.inputRecurrence.title".localized,
                                        placeholder: "newRecipe.inputRecurrence.placeholder".localized)
         input.translatesAutoresizingMaskIntoConstraints = false
         return input
     }()
+    
+    let recurrencePicker: UIPickerView = {
+        let picker = UIPickerView()
+        picker.translatesAutoresizingMaskIntoConstraints = false
+        return picker
+    }()
+    
+    let recurrenceOption = [
+        "De hora em hora",
+        "2 em 2 horas",
+        "4 em 4 horas",
+        "6 em 6 horas",
+        "8 em 8 horas",
+        "12 em 12 horas",
+        "Um por dia",
+    ]
     
     let checkBox: CheckboxView = {
         let checkBox = CheckboxView(title: "newRecipe.checkbox.title".localized)
@@ -76,6 +100,21 @@ class NewRecipeView: UIView {
         return button
     }()
     
+    @objc
+    private func didSelectPickerTime() {
+        let formatter = DateFormatter()
+        formatter.timeStyle = .short
+        timeInput.inputTextField.text = formatter.string(from: timePicker.date)
+        timeInput.inputTextField.resignFirstResponder()
+    }
+    
+    @objc
+    private func didSelectPickerRecurrence() {
+        let selectRow = recurrencePicker.selectedRow(inComponent: 0)
+        recurrenceInput.inputTextField.text = recurrenceOption[selectRow]
+        recurrenceInput.inputTextField.resignFirstResponder()
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.setVisualElements()
@@ -83,6 +122,31 @@ class NewRecipeView: UIView {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    private func setTimeDatePickerInput() {
+        let toolbar = UIToolbar()
+        toolbar.sizeToFit()
+        
+        let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(didSelectPickerTime))
+        toolbar.setItems([doneButton], animated: true)
+        
+        timeInput.inputTextField.inputView = timePicker
+        timeInput.inputTextField.inputAccessoryView = toolbar
+    }
+    
+    private func setRecurrencePickerInput() {
+        let toolbar = UIToolbar()
+        toolbar.sizeToFit()
+        
+        let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(didSelectPickerRecurrence))
+        toolbar.setItems([doneButton], animated: true)
+        
+        recurrenceInput.inputTextField.inputView = recurrencePicker
+        recurrenceInput.inputTextField.inputAccessoryView = toolbar
+        
+        recurrencePicker.delegate = self
+        recurrencePicker.dataSource = self
     }
     
     private func setVisualElements() {
@@ -96,6 +160,8 @@ class NewRecipeView: UIView {
         self.addSubview(addButton)
         
         self.setConstraints()
+        self.setTimeDatePickerInput()
+        self.setRecurrencePickerInput()
     }
     
     private func setConstraints() {
@@ -133,6 +199,20 @@ class NewRecipeView: UIView {
             addButton.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor, constant: -Metrics.smallLarge),
             addButton.heightAnchor.constraint(equalToConstant: Metrics.buttonSize),
         ])
+    }
+}
+
+extension NewRecipeView: UIPickerViewDelegate, UIPickerViewDataSource {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return recurrenceOption.count
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return recurrenceOption[row]
     }
 }
 

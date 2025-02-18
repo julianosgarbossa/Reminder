@@ -17,7 +17,7 @@ class InputNewRecipeView: UIView {
         return label
     }()
     
-    private let inputTextField: PaddedTextField = {
+    let inputTextField: PaddedTextField = {
         let textField = PaddedTextField()
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.font = Typography.input

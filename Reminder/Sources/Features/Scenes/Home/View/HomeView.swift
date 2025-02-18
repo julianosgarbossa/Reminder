@@ -22,7 +22,7 @@ class HomeView: UIView {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFit
-        imageView.layer.cornerRadius = Metrics.medium
+        imageView.layer.cornerRadius = Metrics.mediumLarge
         imageView.clipsToBounds = true
         imageView.isUserInteractionEnabled = true
         imageView.image = UIImage(named: "home.image.avatar".localized)
