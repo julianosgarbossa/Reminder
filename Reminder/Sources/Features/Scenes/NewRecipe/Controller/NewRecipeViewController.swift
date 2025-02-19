@@ -69,3 +69,8 @@ class NewRecipeViewController: UIViewController {
         print("Receita \(remedy) adicionda")
     }
 }
+
+#Preview {
+    let newRecipeView = NewRecipeView()
+    NewRecipeViewController(newRecipeView: newRecipeView)
+}

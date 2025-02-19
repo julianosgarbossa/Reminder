@@ -40,3 +40,7 @@ class SplashView: UIView {
         ])
     }
 }
+
+#Preview {
+    SplashView()
+}

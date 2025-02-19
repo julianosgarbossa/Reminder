@@ -119,7 +119,7 @@ class NewRecipeView: UIView {
     
     @objc
     private func inputDidChange() {
-        
+        self.validateInputs()
     }
     
     override init(frame: CGRect) {

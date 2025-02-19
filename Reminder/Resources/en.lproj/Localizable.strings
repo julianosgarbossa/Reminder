@@ -33,9 +33,13 @@
 /* MARK: - BUTTON HOME SCREEN */
 "buttonHomeView.image.arrow.icon" = "chevron.right";
 
-/* MARK: - RECEIPTS SCREEN */
+/* MARK: - MYRECIPE SCREEN */
+"myRecipe.backButton.image" = "arrow.left";
+"myRecipe.addButton.image" = "newRecipe";
+"myRecipe.label.title" = "Minhas receitas";
+"myRecipe.label.description" = "Acompanhe seus medicamentos cadastrados e gerencie lembretes";
 
-/* MARK: - NEWRECEIPT SCREEN */
+/* MARK: - NEWRECIPE SCREEN */
 "newRecipe.button.image" = "arrow.left";
 "newRecipe.label.title" = "Nova receita";
 "newRecipe.label.description" = "Adicione a sua prescrição médica para receber lembretres de quando tomar seu medicamento";

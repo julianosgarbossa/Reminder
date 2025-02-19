@@ -101,7 +101,7 @@ class HomeView: UIView {
         self.profileBackground.addSubview(viewBackground)
         self.viewBackground.addSubview(myRecipesButton)
         self.viewBackground.addSubview(newRecipeButton)
-        self.profileBackground.addSubview(feedbackButton)
+        self.viewBackground.addSubview(feedbackButton)
         
         self.setImageGesture()
         
