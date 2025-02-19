@@ -106,6 +106,7 @@ class NewRecipeView: UIView {
         formatter.timeStyle = .short
         timeInput.inputTextField.text = formatter.string(from: timePicker.date)
         timeInput.inputTextField.resignFirstResponder()
+        self.validateInputs()
     }
     
     @objc
@@ -113,11 +114,21 @@ class NewRecipeView: UIView {
         let selectRow = recurrencePicker.selectedRow(inComponent: 0)
         recurrenceInput.inputTextField.text = recurrenceOption[selectRow]
         recurrenceInput.inputTextField.resignFirstResponder()
+        self.validateInputs()
+    }
+    
+    @objc
+    private func inputDidChange() {
+        
     }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.setVisualElements()
+        self.setTimeDatePickerInput()
+        self.setRecurrencePickerInput()
+        self.setObservers()
+        self.validateInputs()
     }
     
     required init?(coder: NSCoder) {
@@ -149,6 +160,21 @@ class NewRecipeView: UIView {
         recurrencePicker.dataSource = self
     }
     
+    private func validateInputs() {
+        let isRemedyFilled = !(remedyInput.inputTextField.text ?? "").isEmpty
+        let isTimeFilled = !(timeInput.inputTextField.text ?? "").isEmpty
+        let isRecurrenceFilled = !(recurrenceInput.inputTextField.text ?? "").isEmpty
+        
+        addButton.isEnabled = isRemedyFilled && isTimeFilled && isRecurrenceFilled
+        addButton.backgroundColor = addButton.isEnabled ? Colors.redBase : Colors.gray500
+    }
+    
+    private func setObservers() {
+        remedyInput.inputTextField.addTarget(self, action: #selector(inputDidChange), for: .editingChanged)
+        timeInput.inputTextField.addTarget(self, action: #selector(inputDidChange), for: .editingChanged)
+        recurrenceInput.inputTextField.addTarget(self, action: #selector(inputDidChange), for: .editingChanged)
+    }
+    
     private func setVisualElements() {
         self.addSubview(backButton)
         self.addSubview(titleLabel)
@@ -160,8 +186,6 @@ class NewRecipeView: UIView {
         self.addSubview(addButton)
         
         self.setConstraints()
-        self.setTimeDatePickerInput()
-        self.setRecurrencePickerInput()
     }
     
     private func setConstraints() {
