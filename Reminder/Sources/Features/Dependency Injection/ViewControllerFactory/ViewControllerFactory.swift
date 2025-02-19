@@ -27,6 +27,12 @@ final class ViewControllerFactory: ViewControllerFactoryProtocol {
         return homeViewController
     }
     
+    func makeMyRecipeViewController(myRecipeFlowDelegate: MyRecipeFlowDelegate) -> MyRecipeViewController {
+        let myRecipeView = MyRecipeView()
+        let myRecipeViewController = MyRecipeViewController(myRecipeView: myRecipeView, myRecipeFlowDelegate: myRecipeFlowDelegate)
+        return myRecipeViewController
+    }
+    
     func makeNewRecipeViewController() -> NewRecipeViewController {
         let newRecipeView = NewRecipeView()
         let newRecipeViewController = NewRecipeViewController(newRecipeView: newRecipeView)

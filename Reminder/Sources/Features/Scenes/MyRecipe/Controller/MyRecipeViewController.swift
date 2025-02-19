@@ -9,10 +9,19 @@ import UIKit
 
 class MyRecipeViewController: UIViewController {
 
-    let myRecipeView: MyRecipeView
+    private let myRecipeView: MyRecipeView
+    private weak var myRecipeFlowDelegate: MyRecipeFlowDelegate?
     
-    init(myRecipeView: MyRecipeView) {
+    @objc
+    private func backButtonTapped() {
+        self.navigationController?.popViewController(animated: true)
+        self.navigationItem.hidesBackButton = true
+        self.navigationController?.navigationBar.isHidden = false
+    }
+    
+    init(myRecipeView: MyRecipeView, myRecipeFlowDelegate: MyRecipeFlowDelegate) {
         self.myRecipeView = myRecipeView
+        self.myRecipeFlowDelegate = myRecipeFlowDelegate
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -23,6 +32,11 @@ class MyRecipeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setVisualElements()
+        self.setAction()
+    }
+    
+    private func setAction() {
+        self.myRecipeView.backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
     }
     
     private func setVisualElements() {
@@ -42,7 +56,7 @@ class MyRecipeViewController: UIViewController {
     }
 }
 
-#Preview {
-    let myRecipeView = MyRecipeView()
-    MyRecipeViewController(myRecipeView: myRecipeView)
-}
+//#Preview {
+//    let myRecipeView = MyRecipeView()
+//    MyRecipeViewController(myRecipeView: myRecipeView, myRecipeFlowDelegate: )
+//}

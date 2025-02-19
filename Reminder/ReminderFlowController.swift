@@ -55,13 +55,28 @@ extension ReminderFlowController: LoginFlowDelegate {
 
 // MARK: Home
 extension ReminderFlowController: HomeFlowDelegate {
-    func navigateToRecipes() {
-        let newRecipeViewController = viewControllerFactory.makeNewRecipeViewController()
-        self.navigationController?.pushViewController(newRecipeViewController, animated: true)
-    }
-    
     func logout() {
         self.navigationController?.popViewController(animated: false)
+        self.navigationController?.navigationBar.isHidden = true
         self.openLogin()
+    }
+    
+    func navigateToMyRecipe() {
+        let myRecipeViewController = viewControllerFactory.makeMyRecipeViewController(myRecipeFlowDelegate: self)
+        self.navigationController?.pushViewController(myRecipeViewController, animated: true)
+        self.navigationController?.navigationBar.isHidden = true
+    }
+    
+    func navigateToNewRecipe() {
+        let newRecipeViewController = viewControllerFactory.makeNewRecipeViewController()
+        self.navigationController?.pushViewController(newRecipeViewController, animated: true)
+        self.navigationController?.navigationBar.isHidden = true
+    }
+}
+
+// MARK: My Recipe
+extension ReminderFlowController: MyRecipeFlowDelegate {
+    func goToNewRecipe() {
+        // fazer depois a navegação para da tela de minhas receitas, para a tela de newRecipe (para adicionar uma nova receita)
     }
 }

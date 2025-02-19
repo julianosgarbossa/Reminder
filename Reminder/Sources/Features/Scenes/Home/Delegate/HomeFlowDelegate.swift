@@ -8,6 +8,7 @@
 import Foundation
 
 public protocol HomeFlowDelegate: AnyObject {
-    func navigateToRecipes()
+    func navigateToMyRecipe()
+    func navigateToNewRecipe()
     func logout()
 }

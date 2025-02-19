@@ -31,7 +31,6 @@ class NewRecipeViewController: UIViewController {
         self.view.addSubview(newRecipeView)
         
         self.view.backgroundColor = Colors.gray800
-        self.navigationController?.navigationBar.isHidden = true
         
         self.setConstrains()
     }
@@ -54,6 +53,8 @@ class NewRecipeViewController: UIViewController {
     @objc
     private func backButtonTapped(_ sender: UIButton) {
         self.navigationController?.popViewController(animated: true)
+        self.navigationItem.hidesBackButton = true
+        self.navigationController?.navigationBar.isHidden = false
     }
     
     @objc

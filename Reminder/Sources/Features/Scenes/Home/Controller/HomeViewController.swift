@@ -32,12 +32,11 @@ class HomeViewController: UIViewController {
         self.checkForExistingData()
         self.addDismissKeyboardGesture() // Adiciona o gesto para fechar o teclado
         self.setActionNewRecipe()
+        self.setNavigationBar()
     }
     
     private func setVisualElements() {
         self.view.addSubview(homeView)
-        
-        self.setNavigationBar()
         
         self.setConstraints()
     }
@@ -50,11 +49,15 @@ class HomeViewController: UIViewController {
         self.homeView.newRecipeButton.tapAction = { [weak self] in
             self?.didTapNewRecipeButton()
         }
+        
+        self.homeView.myRecipesButton.tapAction = { [weak self] in
+            self?.didTapMyRecipeButton()
+        }
     }
     
     private func setNavigationBar() {
-        self.navigationController?.navigationBar.isHidden = false
         self.navigationItem.hidesBackButton = true
+        self.navigationController?.navigationBar.isHidden = false
         let logoutButton = UIBarButtonItem(image: UIImage(named: "home.button.logout.icon".localized),
                                            style: .plain,
                                            target: self,
@@ -97,7 +100,6 @@ class HomeViewController: UIViewController {
     private func logoutAction() {
         UserDefaultMenager.removeUser()
         self.homeFlowDelegate?.logout()
-        self.navigationController?.navigationBar.isHidden = true
     }
 }
 
@@ -106,8 +108,12 @@ extension HomeViewController: HomeDelegate {
         self.selectProfileImage()
     }
     
+    func didTapMyRecipeButton() {
+        homeFlowDelegate?.navigateToMyRecipe()
+    }
+    
     func didTapNewRecipeButton() {
-        homeFlowDelegate?.navigateToRecipes()
+        homeFlowDelegate?.navigateToNewRecipe()
     }
 }
 
