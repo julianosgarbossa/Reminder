@@ -9,6 +9,7 @@ import Foundation
 
 class HomeViewModel {
     
-    
-    
+    func logoutUser() {
+        UserDefaultMenager.removeUser()
+    }
 }

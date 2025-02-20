@@ -98,7 +98,7 @@ class HomeViewController: UIViewController {
     
     @objc
     private func logoutAction() {
-        UserDefaultMenager.removeUser()
+        self.homeViewModel.logoutUser()
         self.homeFlowDelegate?.logout()
     }
 }
