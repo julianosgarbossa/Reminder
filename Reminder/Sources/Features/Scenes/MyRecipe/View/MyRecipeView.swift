@@ -68,6 +68,15 @@ class MyRecipeView: UIView {
         return view
     }()
     
+    let tableView: UITableView = {
+        let tableView = UITableView()
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.backgroundColor = .clear
+        tableView.separatorStyle = .none
+        tableView.register(MyRecipeTableViewCell.self, forCellReuseIdentifier: MyRecipeTableViewCell.identifier)
+        return tableView
+    }()
+    
     @objc
     private func didTapBackButton(_sender: UIButton) {
         self.delegate?.didTapBackButton()
@@ -94,6 +103,7 @@ class MyRecipeView: UIView {
         self.headerBackground.addSubview(titleLabel)
         self.headerBackground.addSubview(descriptionLabel)
         self.addSubview(viewBackground)
+        viewBackground.addSubview(tableView)
 
         
         self.setConstraints()
@@ -128,6 +138,11 @@ class MyRecipeView: UIView {
             viewBackground.leadingAnchor.constraint(equalTo: headerBackground.leadingAnchor),
             viewBackground.trailingAnchor.constraint(equalTo: headerBackground.trailingAnchor),
             viewBackground.bottomAnchor.constraint(equalTo: headerBackground.bottomAnchor),
+            
+            tableView.topAnchor.constraint(equalTo: viewBackground.topAnchor, constant: Metrics.hugeSmall),
+            tableView.leadingAnchor.constraint(equalTo: viewBackground.leadingAnchor, constant: Metrics.mediumLarge),
+            tableView.trailingAnchor.constraint(equalTo: viewBackground.trailingAnchor, constant: -Metrics.mediumLarge),
+            tableView.bottomAnchor.constraint(equalTo: viewBackground.bottomAnchor),
         ])
     }
 }

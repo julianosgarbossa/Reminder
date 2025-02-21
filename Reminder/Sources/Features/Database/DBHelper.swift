@@ -55,11 +55,11 @@ class DBHelper {
     
     func insertRecipe(remedy: String, time: String, recurrence: String, takeNow: Bool) {
         let insertQuery = """
-        INSERT INTO Recipes (
-            remedy,
-            time,
-            recurrence,
-            takeNow) VALUES (?, ?, ?, ?);
+        INSERT INTO RECIPES (
+            REMEDY,
+            TIME,
+            RECURRENCE,
+            TAKENOW) VALUES (?, ?, ?, ?);
         """
         
         var statement: OpaquePointer?
@@ -78,6 +78,46 @@ class DBHelper {
         } else {
             let errorMessage = String(cString: sqlite3_errmsg(db))
             print("Erro ao preparar a query de inserção dos dados: \(errorMessage)")
+        }
+        sqlite3_finalize(statement)
+    }
+    
+    func fetchRecipe() -> [Medicine] {
+        let fetchQuery = "SELECT * FROM RECIPES;"
+        
+        var statement: OpaquePointer?
+        var recipes: [Medicine] = []
+        
+        if sqlite3_prepare_v2(db, fetchQuery, -1, &statement, nil) == SQLITE_OK {
+            while sqlite3_step(statement) == SQLITE_ROW {
+                let id = Int(sqlite3_column_int(statement, 0))
+                let remedy = sqlite3_column_text(statement, 1).flatMap { String(cString: $0) } ?? "Unknown"
+                let time = sqlite3_column_text(statement, 2).flatMap { String(cString: $0) } ?? "Unknown"
+                let recurrence = sqlite3_column_text(statement, 3).flatMap { String(cString: $0) } ?? "Unknown"
+                recipes.append(Medicine(id: id, remedy: remedy, time: time, recurrence: recurrence))
+            }
+        } else {
+            print("SELECT statement falhou")
+        }
+        sqlite3_finalize(statement)
+        return recipes
+    }
+    
+    func deleteRecipe(id: Int) {
+        let deleteQuery = "DELETE FROM RECIPES WHERE ID = ?;"
+        
+        var statement: OpaquePointer?
+        
+        if sqlite3_prepare_v2(db, deleteQuery, -1, &statement, nil) == SQLITE_OK {
+            sqlite3_bind_int(statement, 1, Int32(id))
+            
+            if sqlite3_step(statement) == SQLITE_DONE {
+                print("Receita deletada com sucesso!")
+            } else {
+                print("Erro ao deletar a receita")
+            }
+        } else {
+            print("Delete statement falhou")
         }
         sqlite3_finalize(statement)
     }

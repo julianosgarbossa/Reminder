@@ -11,13 +11,8 @@ class MyRecipeViewController: UIViewController {
 
     private let myRecipeView: MyRecipeView
     private weak var myRecipeFlowDelegate: MyRecipeFlowDelegate?
-    
-    @objc
-    private func backButtonTapped() {
-        self.navigationController?.popViewController(animated: true)
-        self.navigationItem.hidesBackButton = true
-        self.navigationController?.navigationBar.isHidden = false
-    }
+    private let myRecipeViewModel = MyRecipeViewModel()
+    private var medicines: [Medicine] = []
     
     init(myRecipeView: MyRecipeView, myRecipeFlowDelegate: MyRecipeFlowDelegate) {
         self.myRecipeView = myRecipeView
@@ -31,12 +26,19 @@ class MyRecipeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.myRecipeView.delegate = self
         self.setVisualElements()
-        self.setAction()
+        self.setTableView()
+        self.loadData()
     }
     
-    private func setAction() {
-        self.myRecipeView.backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
+    private func loadData() {
+        medicines = self.myRecipeViewModel.fetchData()
+    }
+    
+    private func setTableView() {
+        self.myRecipeView.tableView.dataSource = self
+        self.myRecipeView.tableView.delegate = self
     }
     
     private func setVisualElements() {
@@ -53,6 +55,61 @@ class MyRecipeViewController: UIViewController {
             myRecipeView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
             myRecipeView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor)
         ])
+    }
+}
+
+extension MyRecipeViewController: MyRecipeViewDelegate {
+    func didTapBackButton() {
+        self.myRecipeFlowDelegate?.popScreen()
+        self.navigationItem.hidesBackButton = true
+        self.navigationController?.navigationBar.isHidden = false
+    }
+    
+    func didTapAddNewRecipeButton() {
+        self.myRecipeFlowDelegate?.goToNewRecipe()
+    }
+}
+
+extension MyRecipeViewController: UITableViewDelegate {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return medicines.count
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 90
+    }
+    
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        return UIView() // Apenas para garantir que o espaço seja respeitado
+    }
+    
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 12 // Define o espaçamento entre as seções
+    }
+}
+
+extension MyRecipeViewController: UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: MyRecipeTableViewCell.identifier, for: indexPath) as? MyRecipeTableViewCell else { return UITableViewCell() }
+        let medicine = medicines[indexPath.section]
+        cell.configCell(title: medicine.remedy, time: medicine.time, recurrence: medicine.recurrence)
+        cell.onDelete = { [weak self] in
+            guard let self = self else {return}
+            if let actualIndexPath = tableView.indexPath(for: cell) {
+                if actualIndexPath.section < self.medicines.count {
+                    self.myRecipeViewModel.deleteRecipe(id: self.medicines[actualIndexPath.section].id)
+                    self.medicines.remove(at: actualIndexPath.section)
+                    tableView.deleteSections(IndexSet(integer: actualIndexPath.section), with: .automatic)
+                } else {
+                    print("Erro ao excluir uma sessão invalida")
+                }
+            }
+        }
+        return cell
     }
 }
 

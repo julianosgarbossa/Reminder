@@ -76,7 +76,11 @@ extension ReminderFlowController: HomeFlowDelegate {
 
 // MARK: My Recipe
 extension ReminderFlowController: MyRecipeFlowDelegate {
+    func popScreen() {
+        self.navigationController?.popViewController(animated: true)
+    }
+    
     func goToNewRecipe() {
-        // fazer depois a navegação para da tela de minhas receitas, para a tela de newRecipe (para adicionar uma nova receita)
+        self.navigateToNewRecipe()
     }
 }
