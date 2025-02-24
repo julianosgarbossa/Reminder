@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UserNotifications
 
 class MyRecipeViewModel {
     func fetchData() -> [Medicine] {
@@ -14,6 +15,13 @@ class MyRecipeViewModel {
     
     func deleteRecipe(id: Int) {
         DBHelper.shared.deleteRecipe(id: id)
+    }
+    
+    func removeNotifications(remedy: String) {
+        let center = UNUserNotificationCenter.current()
+        let identifiers = (0..<6).map() {"\(remedy) - \($0)"}
+        center.removePendingNotificationRequests(withIdentifiers: identifiers)
+        print("Notificações para \(identifiers) removidas")
     }
     
 //    private let mockMedicamentos = [

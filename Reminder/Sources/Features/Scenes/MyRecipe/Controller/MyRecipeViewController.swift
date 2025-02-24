@@ -106,6 +106,7 @@ extension MyRecipeViewController: UITableViewDataSource {
             if let actualIndexPath = tableView.indexPath(for: cell) {
                 if actualIndexPath.section < self.medicines.count {
                     self.myRecipeViewModel.deleteRecipe(id: self.medicines[actualIndexPath.section].id)
+                    self.myRecipeViewModel.removeNotifications(remedy: self.medicines[actualIndexPath.section].remedy)
                     self.medicines.remove(at: actualIndexPath.section)
                     tableView.deleteSections(IndexSet(integer: actualIndexPath.section), with: .automatic)
                 } else {
