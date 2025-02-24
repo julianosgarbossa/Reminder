@@ -96,21 +96,6 @@ class LoginView: UIView {
         return button
     }()
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        self.setVisualElements()
-        self.backgroundColor = Colors.gray800
-        self.layer.cornerRadius = Metrics.medium
-        
-        // Nada funcional, apenas para estudo
-        let exempleGest = UITapGestureRecognizer(target: self, action: #selector(exempleTaped))
-        titleLabel.addGestureRecognizer(exempleGest)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
     @objc
     private func exempleTaped() {
         // Apenas para estudo
@@ -134,6 +119,27 @@ class LoginView: UIView {
         let user = emailTextField.text ?? ""
         let password = passwordTextField.text ?? ""
         delegate?.sendLoginData(user: user, password: password)
+    }
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        self.setVisualElements()
+        self.backgroundColor = Colors.gray800
+        self.layer.cornerRadius = Metrics.medium
+        self.setDelegates()
+        
+        // Nada funcional, apenas para estudo
+        let exempleGest = UITapGestureRecognizer(target: self, action: #selector(exempleTaped))
+        titleLabel.addGestureRecognizer(exempleGest)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    private func setDelegates() {
+        emailTextField.delegate = self
+        passwordTextField.delegate = self
     }
     
     private func setVisualElements() {
@@ -190,6 +196,15 @@ class LoginView: UIView {
             loginButton.heightAnchor.constraint(equalToConstant: Metrics.buttonSize),
         ])
     }
+}
+
+extension LoginView: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+    
+    
 }
 
 #Preview {

@@ -13,6 +13,26 @@ class LoginViewController: UIViewController {
     var handleAreaHeigh: CGFloat = 50.0
     private weak var loginFlowDelegate: LoginFlowDelegate?
     
+    
+    @objc
+    private func keyboardWillShow(notification: Notification) {
+        guard let userInfo = notification.userInfo,
+              let keyboardFrame = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect else { return }
+        
+        let keyboardHeight = keyboardFrame.height
+        
+        UIView.animate(withDuration: 0.3) {
+            self.view.frame.origin.y = -keyboardHeight / 1.5
+        }
+    }
+    
+    @objc
+    private func keyboardWillHide(notification: Notification) {
+        UIView.animate(withDuration: 0.3) {
+            self.view.frame.origin.y = 0
+        }
+    }
+    
     init(loginView: LoginView, loginFlowDelegate: LoginFlowDelegate) {
         self.loginView = loginView
         self.loginFlowDelegate = loginFlowDelegate
@@ -28,6 +48,18 @@ class LoginViewController: UIViewController {
         self.loginView.delegate = self
         self.setVisualElements()
         self.bindViewModel()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
     private func setVisualElements() {
