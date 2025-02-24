@@ -135,6 +135,14 @@ class NewRecipeView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    func clearFieldsAndDisableButton() {
+        self.remedyInput.inputTextField.text = ""
+        self.timeInput.inputTextField.text = ""
+        self.recurrenceInput.inputTextField.text = ""
+        self.addButton.isEnabled = false
+        self.addButton.backgroundColor = Colors.gray500
+    }
+    
     private func setTimeDatePickerInput() {
         let toolbar = UIToolbar()
         toolbar.sizeToFit()

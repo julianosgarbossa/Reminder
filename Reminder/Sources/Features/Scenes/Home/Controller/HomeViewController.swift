@@ -32,6 +32,9 @@ class HomeViewController: UIViewController {
         self.checkForExistingData()
         self.addDismissKeyboardGesture() // Adiciona o gesto para fechar o teclado
         self.setActionNewRecipe()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
         self.setNavigationBar()
     }
     

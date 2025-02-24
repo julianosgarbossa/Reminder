@@ -29,7 +29,11 @@ class MyRecipeViewController: UIViewController {
         self.myRecipeView.delegate = self
         self.setVisualElements()
         self.setTableView()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
         self.loadData()
+        self.myRecipeView.tableView.reloadData()
     }
     
     private func loadData() {
