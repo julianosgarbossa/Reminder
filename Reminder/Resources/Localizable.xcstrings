@@ -37,6 +37,42 @@
         }
       }
     },
+    "login.label.email" : {
+      "comment" : "Texto exibido a cima do textfield de email",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "E-mail"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Email"
+          }
+        }
+      }
+    },
+    "login.label.password" : {
+      "comment" : "Texto exibido a cima do textfield de senha",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Password"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Senha"
+          }
+        }
+      }
+    },
     "login.label.title" : {
       "comment" : "Título da tela de login, exibido acima do formulário",
       "extractionState" : "manual",

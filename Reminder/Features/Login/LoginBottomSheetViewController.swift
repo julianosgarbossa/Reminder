@@ -32,7 +32,7 @@ class LoginBottomSheetViewController: UIViewController {
             loginBottomSheetView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
             loginBottomSheetView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
             loginBottomSheetView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor),
-            loginBottomSheetView.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.5),
+            loginBottomSheetView.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.6),
         ])
     }
     
