@@ -82,7 +82,6 @@ class LoginBottomSheetView: UIView {
         self.backgroundColor = .white
         self.layer.cornerRadius = Metrics.medium
         self.layer.maskedCorners = [ .layerMinXMinYCorner, .layerMaxXMinYCorner]
-        
         self.addSubview(titleLabel)
         self.addSubview(emailLabel)
         self.addSubview(emailTextField)
@@ -95,7 +94,7 @@ class LoginBottomSheetView: UIView {
     
     private func setupConstraints() {
         NSLayoutConstraint.activate([
-            titleLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: Metrics.huge),
+            titleLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: Metrics.large),
             titleLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: Metrics.large),
             titleLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -Metrics.large),
             
@@ -117,9 +116,9 @@ class LoginBottomSheetView: UIView {
             passwordTextField.trailingAnchor.constraint(equalTo: titleLabel.trailingAnchor),
             passwordTextField.heightAnchor.constraint(equalTo: emailTextField.heightAnchor),
             
+            loginButton.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor, constant: Metrics.large),
             loginButton.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor),
             loginButton.trailingAnchor.constraint(equalTo: titleLabel.trailingAnchor),
-            loginButton.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor, constant: -Metrics.small),
             loginButton.heightAnchor.constraint(equalToConstant: Metrics.buttonSize),
         ])
     }
