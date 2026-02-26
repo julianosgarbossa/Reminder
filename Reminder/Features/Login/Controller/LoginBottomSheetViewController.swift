@@ -18,6 +18,7 @@ class LoginBottomSheetViewController: UIViewController {
         setupUI()
         setupGesture()
         loginBottomSheetView.delegate(delegate: self)
+        bindViewModel()
     }
     
     private func setupUI() {
@@ -54,6 +55,13 @@ class LoginBottomSheetViewController: UIViewController {
         }) { _ in
             completion?()
         }
+    }
+    
+    private func bindViewModel() {
+        viewModel.sucessResult = {
+            print("chegou na LoginBottomSheetViewController")
+        }
+        
     }
 }
 
