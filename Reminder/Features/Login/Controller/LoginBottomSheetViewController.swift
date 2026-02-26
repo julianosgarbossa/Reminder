@@ -9,14 +9,15 @@ import UIKit
 
 class LoginBottomSheetViewController: UIViewController {
     
-    private let loginBottomSheetView = LoginBottomSheetView()
+    private var loginBottomSheetView = LoginBottomSheetView()
+    private let viewModel = LoginBottomSheetViewModel()
     private let handleAreaHeight: CGFloat = 50.0
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         setupUI()
         setupGesture()
+        loginBottomSheetView.delegate(delegate: self)
     }
     
     private func setupUI() {
@@ -53,6 +54,12 @@ class LoginBottomSheetViewController: UIViewController {
         }) { _ in
             completion?()
         }
+    }
+}
+
+extension LoginBottomSheetViewController: LoginBottomSheetViewDelegate {
+    func sendLoginData(user: String, password: String) {
+        viewModel.doAuth(user: user, password: password)
     }
 }
 

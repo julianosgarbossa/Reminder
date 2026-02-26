@@ -7,7 +7,17 @@
 
 import UIKit
 
+protocol LoginBottomSheetViewDelegate: AnyObject {
+    func sendLoginData(user: String, password: String)
+}
+
 class LoginBottomSheetView: UIView {
+    
+    private weak var delegate: LoginBottomSheetViewDelegate?
+    
+    func delegate(delegate: LoginBottomSheetViewDelegate) {
+        self.delegate = delegate
+    }
     
     private let titleLabel: UILabel = {
         let label = UILabel()
@@ -57,7 +67,7 @@ class LoginBottomSheetView: UIView {
         return textField
     }()
     
-    private let loginButton: UIButton = {
+    private lazy var loginButton: UIButton = {
         let button = UIButton(type: .system)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("login.button.title".localized, for: .normal)
@@ -65,8 +75,16 @@ class LoginBottomSheetView: UIView {
         button.tintColor = .white
         button.layer.cornerRadius = Metrics.medium
         button.backgroundColor = Colors.primaryRedBase
+        button.addTarget(self, action: #selector(didTapLoginButton), for: .touchUpInside)
         return button
     }()
+    
+    @objc
+    private func didTapLoginButton(_sender: UIButton) {
+        guard let user = emailTextField.text,
+              let password = passwordTextField.text else { return }
+        delegate?.sendLoginData(user: user, password: password)
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
