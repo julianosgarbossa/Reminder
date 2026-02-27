@@ -7,12 +7,26 @@
 
 import UIKit
 
+protocol LoginBottomSheetFlowDelegate: AnyObject {
+    func navigateToHome()
+}
+
 class LoginBottomSheetViewController: UIViewController {
     
     private var loginBottomSheetView = LoginBottomSheetView()
     private let viewModel = LoginBottomSheetViewModel()
     private let handleAreaHeight: CGFloat = 50.0
-
+    weak var flowDelegate: LoginBottomSheetFlowDelegate?
+    
+    init(flowDelegate: LoginBottomSheetFlowDelegate) {
+        super.init(nibName: nil, bundle: nil)
+        self.flowDelegate = flowDelegate
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
@@ -58,8 +72,8 @@ class LoginBottomSheetViewController: UIViewController {
     }
     
     private func bindViewModel() {
-        viewModel.sucessResult = {
-            print("chegou na LoginBottomSheetViewController")
+        viewModel.sucessResult = { [weak self] in
+            self?.flowDelegate?.navigateToHome()
         }
         
     }

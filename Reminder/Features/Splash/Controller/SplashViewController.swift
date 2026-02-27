@@ -7,10 +7,24 @@
 
 import UIKit
 
+protocol SplashFlowDelegate: AnyObject {
+    func openLoginBottomSheet()
+}
+
 class SplashViewController: UIViewController {
     
     private let splashView = SplashView()
-
+    weak var flowDelegate: SplashFlowDelegate?
+    
+    init(flowDelegate: SplashFlowDelegate) {
+        super.init(nibName: nil, bundle: nil)
+        self.flowDelegate = flowDelegate
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -44,13 +58,6 @@ class SplashViewController: UIViewController {
     
     @objc
     private func showLoginBottomSheet() {
-        let loginBottomSheetViewController = LoginBottomSheetViewController()
-        
-        loginBottomSheetViewController.modalPresentationStyle = .overCurrentContext
-        loginBottomSheetViewController.modalTransitionStyle = .crossDissolve
-        
-        present(loginBottomSheetViewController, animated: false) {
-            loginBottomSheetViewController.animateShow()
-        }
+        flowDelegate?.openLoginBottomSheet()
     }
 }
