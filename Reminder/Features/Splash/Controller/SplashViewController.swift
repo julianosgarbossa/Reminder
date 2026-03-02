@@ -13,12 +13,13 @@ protocol SplashFlowDelegate: AnyObject {
 
 class SplashViewController: UIViewController {
     
-    private let splashView = SplashView()
+    private let contentView: SplashView
     weak var flowDelegate: SplashFlowDelegate?
     
-    init(flowDelegate: SplashFlowDelegate) {
-        super.init(nibName: nil, bundle: nil)
+    init(contentView: SplashView,flowDelegate: SplashFlowDelegate) {
+        self.contentView = contentView
         self.flowDelegate = flowDelegate
+        super.init(nibName: nil, bundle: nil)
     }
     
     required init?(coder: NSCoder) {
@@ -34,20 +35,20 @@ class SplashViewController: UIViewController {
     }
     
     private func setup() {
-        self.view.addSubview(splashView)
+        self.view.addSubview(contentView)
         
         setupConstraints()
     }
     
     private func setupConstraints() {
         
-        splashView.translatesAutoresizingMaskIntoConstraints = false
+        contentView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            splashView.topAnchor.constraint(equalTo: view.topAnchor),
-            splashView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            splashView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            splashView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            contentView.topAnchor.constraint(equalTo: view.topAnchor),
+            contentView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            contentView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            contentView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
         ])
     }
     
