@@ -20,7 +20,7 @@ class SplashScreen: UIView {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = UIColor(red: 192/255, green: 38/255, blue: 54/255, alpha: 1)
+        backgroundColor = Colors.primaryRedBase
         addVisualElements()
     }
     
@@ -39,8 +39,6 @@ class SplashScreen: UIView {
         NSLayoutConstraint.activate([
             logoImageView.centerXAnchor.constraint(equalTo: centerXAnchor),
             logoImageView.centerYAnchor.constraint(equalTo: centerYAnchor),
-            logoImageView.heightAnchor.constraint(equalToConstant: 60),
-            logoImageView.widthAnchor.constraint(equalToConstant: 255),
         ])
     }
 }
