@@ -14,13 +14,29 @@ class SplashViewController: UIViewController {
     override func loadView() {
         view = screen
     }
+    
+    @objc
+    private func showLoginBottomSheet() {
+        let loginBottomSheetViewController: LoginBottomSheetViewController = LoginBottomSheetViewController()
+        loginBottomSheetViewController.modalPresentationStyle = .overCurrentContext
+        present(loginBottomSheetViewController, animated: false) {
+            loginBottomSheetViewController.loginBottomSheetAnimateShow()
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        definesPresentationContext = true
         configNavigationControler()
+        setupTapGesture()
     }
     
     private func configNavigationControler() {
         navigationController?.navigationBar.isHidden = true
+    }
+    
+    private func setupTapGesture() {
+        let tap = UITapGestureRecognizer(target: self, action: #selector(showLoginBottomSheet))
+        view.addGestureRecognizer(tap)
     }
 }
