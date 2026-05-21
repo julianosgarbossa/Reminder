@@ -38,6 +38,7 @@ class LoginBottomSheetViewController: UIViewController {
     
     private func configDelegates() {
         screen.configDelegate(delegate: self)
+        viewModel.configDelegate(delegate: self)
     }
     
     private func addVisualElements() {
@@ -76,5 +77,15 @@ class LoginBottomSheetViewController: UIViewController {
 extension LoginBottomSheetViewController: LoginBottomSheetScreenDelegate {
     func sendLoginData(user: String, password: String) {
         viewModel.doAuth(user: user, password: password)
+    }
+}
+
+extension LoginBottomSheetViewController: LoginBottomSheetViewModelDelegate {
+    func successResult() {
+        print("Usuário logado com sucesso!")
+    }
+    
+    func failure(error: String) {
+        print("Erro ao logar: \(error)")
     }
 }

@@ -8,14 +8,26 @@
 import Foundation
 import FirebaseAuth
 
+protocol LoginBottomSheetViewModelDelegate: AnyObject {
+    func successResult()
+    func failure(error: String)
+}
+
 class LoginBottomSheetViewModel {
+    
+    private weak var delegate: LoginBottomSheetViewModelDelegate?
+    
+    func configDelegate(delegate: LoginBottomSheetViewModelDelegate) {
+        self.delegate = delegate
+    }
+    
     func doAuth(user: String, password: String) {
-        Auth.auth().signIn(withEmail: user, password: password) { authResult, error in
+        Auth.auth().signIn(withEmail: user, password: password) { [weak self] authResult, error in
+            guard let self else { return }
             if let error {
-                print("Autenticação Falhou: \(error)")
+                self.delegate?.failure(error: error.localizedDescription)
             } else {
-                guard let authResult else { return }
-                print("Usuário Logado com Sucesso: \(authResult)")
+                self.delegate?.successResult()
             }
         }
     }
