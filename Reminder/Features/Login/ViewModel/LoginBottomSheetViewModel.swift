@@ -6,9 +6,17 @@
 //
 
 import Foundation
+import FirebaseAuth
 
 class LoginBottomSheetViewModel {
     func doAuth(user: String, password: String) {
-        // fazer login com firebase
+        Auth.auth().signIn(withEmail: user, password: password) { authResult, error in
+            if let error {
+                print("Autenticação Falhou: \(error)")
+            } else {
+                guard let authResult else { return }
+                print("Usuário Logado com Sucesso: \(authResult)")
+            }
+        }
     }
 }

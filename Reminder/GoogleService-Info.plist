@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>API_KEY</key>
+	<string>AIzaSyAPSa2gl5mKH06SqmiKQiPp98C4u8z4rAk</string>
+	<key>GCM_SENDER_ID</key>
+	<string>133807806935</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>br.com.julianosgarbossa.Reminder</string>
+	<key>PROJECT_ID</key>
+	<string>reminder-295dc</string>
+	<key>STORAGE_BUCKET</key>
+	<string>reminder-295dc.firebasestorage.app</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:133807806935:ios:01ed9f4727894a12905392</string>
+</dict>
+</plist>
