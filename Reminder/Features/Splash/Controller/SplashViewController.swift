@@ -7,9 +7,23 @@
 
 import UIKit
 
+protocol SplashCoordinatorDelegate: AnyObject {
+    func showLoginBottomSheet()
+}
+
 class SplashViewController: UIViewController {
     
     private let screen: SplashScreen = SplashScreen()
+    private weak var delegate: SplashCoordinatorDelegate?
+    
+    init(delegate: SplashCoordinatorDelegate) {
+        super.init(nibName: nil, bundle: nil)
+        self.delegate = delegate
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func loadView() {
         view = screen
@@ -17,11 +31,7 @@ class SplashViewController: UIViewController {
     
     @objc
     private func showLoginBottomSheet() {
-        let loginBottomSheetViewController: LoginBottomSheetViewController = LoginBottomSheetViewController()
-        loginBottomSheetViewController.modalPresentationStyle = .overCurrentContext
-        present(loginBottomSheetViewController, animated: false) {
-            loginBottomSheetViewController.loginBottomSheetAnimateShow()
-        }
+        delegate?.showLoginBottomSheet()
     }
 
     override func viewDidLoad() {

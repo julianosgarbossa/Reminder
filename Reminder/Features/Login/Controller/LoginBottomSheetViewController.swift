@@ -7,7 +7,13 @@
 
 import UIKit
 
+protocol LoginBottomSheetCoordinatorDelegate: AnyObject {
+    func navigateToHome()
+}
+
 class LoginBottomSheetViewController: UIViewController {
+    
+    private weak var delegate: LoginBottomSheetCoordinatorDelegate?
     
     private let screen: LoginBottomSheetScreen = LoginBottomSheetScreen()
     private let viewModel: LoginBottomSheetViewModel = LoginBottomSheetViewModel()
@@ -21,6 +27,15 @@ class LoginBottomSheetViewController: UIViewController {
         } completion: { _ in
             self.dismiss(animated: false)
         }
+    }
+    
+    init(delegate: LoginBottomSheetCoordinatorDelegate) {
+        super.init(nibName: nil, bundle: nil)
+        self.delegate = delegate
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     override func viewDidLoad() {
@@ -83,6 +98,7 @@ extension LoginBottomSheetViewController: LoginBottomSheetScreenDelegate {
 extension LoginBottomSheetViewController: LoginBottomSheetViewModelDelegate {
     func successResult() {
         print("Usuário logado com sucesso!")
+        delegate?.navigateToHome()
     }
     
     func failure(error: String) {
