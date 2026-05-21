@@ -10,14 +10,13 @@ import UIKit
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
-
+    var coordinator: ReminderCoordinator = ReminderCoordinator()
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: windowScene)
-        let splashViewController = SplashViewController()
-        let nav = UINavigationController(rootViewController: splashViewController)
-        window?.rootViewController = nav
+        let rootViewController = coordinator.start()
+        window?.rootViewController = rootViewController
         window?.makeKeyAndVisible()
     }
 
