@@ -33,6 +33,7 @@ class SplashViewController: UIViewController {
     
     @objc
     private func showLoginBottomSheet() {
+        animateLogoUp()
         delegate?.showLoginBottomSheet()
     }
 
@@ -41,11 +42,7 @@ class SplashViewController: UIViewController {
         definesPresentationContext = true
         configNavigationControler()
         setupTapGesture()
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(true)
-        decideNavigation()
+        startBreathingAnimation()
     }
     
     private func configNavigationControler() {
@@ -62,6 +59,26 @@ class SplashViewController: UIViewController {
             delegate?.showHome()
         } else {
             showLoginBottomSheet()
+        }
+    }
+}
+
+// MARK: - Animações
+extension SplashViewController {
+    private func startBreathingAnimation() {
+        UIView.animate(withDuration: 1.5, delay: 0.0) { [weak self] in
+            self?.screen.logoImageView.transform = CGAffineTransform(scaleX: 1.1, y: 1.1)
+        } completion: { [weak self] _ in
+            self?.decideNavigation()
+        }
+    }
+    
+    private func animateLogoUp() {
+        screen.logoImageView.transform = .identity
+        UIView.animate(withDuration: 0.5, delay: 0.0, options: [.curveEaseOut]) { [weak self] in
+            guard let self else { return }
+            self.screen.logoImageView.transform = self.screen.logoImageView.transform.translatedBy(x: 0, y: -100)
+            
         }
     }
 }

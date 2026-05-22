@@ -17,7 +17,6 @@ class LoginBottomSheetViewController: UIViewController {
     
     private let screen: LoginBottomSheetScreen
     private let viewModel: LoginBottomSheetViewModel = LoginBottomSheetViewModel()
-    private var handleAreaHeight: CGFloat = 50.0
     
     @objc
     private func loginBottomSheetAnimateHide() {
