@@ -9,7 +9,7 @@ import Foundation
 import FirebaseAuth
 
 protocol LoginBottomSheetViewModelDelegate: AnyObject {
-    func successResult()
+    func successResult(email: String)
     func failure(error: String)
 }
 
@@ -27,7 +27,7 @@ class LoginBottomSheetViewModel {
             if let error {
                 self.delegate?.failure(error: error.localizedDescription)
             } else {
-                self.delegate?.successResult()
+                self.delegate?.successResult(email: user)
             }
         }
     }

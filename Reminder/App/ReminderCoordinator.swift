@@ -35,6 +35,10 @@ extension ReminderCoordinator: SplashCoordinatorDelegate {
             loginBottomSheetViewController.loginBottomSheetAnimateShow()
         }
     }
+    
+    func showHome() {
+        navigateToHome()
+    }
 }
 
 // MARK: Login

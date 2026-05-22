@@ -9,6 +9,7 @@ import UIKit
 
 protocol SplashCoordinatorDelegate: AnyObject {
     func showLoginBottomSheet()
+    func showHome()
 }
 
 class SplashViewController: UIViewController {
@@ -32,6 +33,7 @@ class SplashViewController: UIViewController {
     
     @objc
     private func showLoginBottomSheet() {
+        animateLogoUp()
         delegate?.showLoginBottomSheet()
     }
 
@@ -40,6 +42,7 @@ class SplashViewController: UIViewController {
         definesPresentationContext = true
         configNavigationControler()
         setupTapGesture()
+        startBreathingAnimation()
     }
     
     private func configNavigationControler() {
@@ -49,5 +52,33 @@ class SplashViewController: UIViewController {
     private func setupTapGesture() {
         let tap = UITapGestureRecognizer(target: self, action: #selector(showLoginBottomSheet))
         view.addGestureRecognizer(tap)
+    }
+    
+    private func decideNavigation() {
+        if let user = UserDefaultsManager.shared.loadUser() , user.isUserSaved {
+            delegate?.showHome()
+        } else {
+            showLoginBottomSheet()
+        }
+    }
+}
+
+// MARK: - Animações
+extension SplashViewController {
+    private func startBreathingAnimation() {
+        UIView.animate(withDuration: 1.5, delay: 0.0) { [weak self] in
+            self?.screen.logoImageView.transform = CGAffineTransform(scaleX: 1.1, y: 1.1)
+        } completion: { [weak self] _ in
+            self?.decideNavigation()
+        }
+    }
+    
+    private func animateLogoUp() {
+        screen.logoImageView.transform = .identity
+        UIView.animate(withDuration: 0.5, delay: 0.0, options: [.curveEaseOut]) { [weak self] in
+            guard let self else { return }
+            self.screen.logoImageView.transform = self.screen.logoImageView.transform.translatedBy(x: 0, y: -100)
+            
+        }
     }
 }

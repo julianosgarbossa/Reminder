@@ -1,6 +1,82 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "loginBottomSheet.alert.action.no" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Não"
+          }
+        }
+      }
+    },
+    "loginBottomSheet.alert.action.yes" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Salvar"
+          }
+        }
+      }
+    },
+    "loginBottomSheet.alert.error.action.retry" : {
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tentar novamente"
+          }
+        }
+      }
+    },
+    "loginBottomSheet.alert.error.message" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Erro ao realizar o login, verifique e-mail e senha"
+          }
+        }
+      }
+    },
+    "loginBottomSheet.alert.error.title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Erro ao Logar"
+          }
+        }
+      }
+    },
+    "loginBottomSheet.alert.message" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Deseja salvar seu acesso?"
+          }
+        }
+      }
+    },
+    "loginBottomSheet.alert.title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Salvar Acesso"
+          }
+        }
+      }
+    },
     "loginBottomSheet.email.placeholder" : {
       "extractionState" : "manual",
       "localizations" : {
