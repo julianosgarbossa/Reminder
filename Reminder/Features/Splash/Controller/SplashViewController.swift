@@ -9,6 +9,7 @@ import UIKit
 
 protocol SplashCoordinatorDelegate: AnyObject {
     func showLoginBottomSheet()
+    func showHome()
 }
 
 class SplashViewController: UIViewController {
@@ -39,6 +40,7 @@ class SplashViewController: UIViewController {
         super.viewDidLoad()
         definesPresentationContext = true
         configNavigationControler()
+        decideNavigation()
         setupTapGesture()
     }
     
@@ -49,5 +51,13 @@ class SplashViewController: UIViewController {
     private func setupTapGesture() {
         let tap = UITapGestureRecognizer(target: self, action: #selector(showLoginBottomSheet))
         view.addGestureRecognizer(tap)
+    }
+    
+    private func decideNavigation() {
+        if let user = UserDefaultsManager.shared.loadUser() , user.isUserSaved {
+            delegate?.showHome()
+        } else {
+            showLoginBottomSheet()
+        }
     }
 }

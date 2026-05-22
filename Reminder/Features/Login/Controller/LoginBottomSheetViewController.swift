@@ -78,6 +78,28 @@ class LoginBottomSheetViewController: UIViewController {
         view.addGestureRecognizer(swipeDown)
     }
     
+    private func presentSaveLoginAlert(email: String) {
+        let alertController = UIAlertController(title: Localizable.LoginBottomSheetAlert.title,
+                                                message: Localizable.LoginBottomSheetAlert.message,
+                                                preferredStyle: .alert)
+        let saveAction = UIAlertAction(title: Localizable.LoginBottomSheetAlert.actionYes,
+                                       style: .default) { [weak self] _ in
+            guard let self else { return }
+            let user = User(email: email, isUserSaved: true)
+            UserDefaultsManager.shared.save(user: user)
+            self.delegate?.navigateToHome()
+        }
+        
+        let cancelAction = UIAlertAction(title: Localizable.LoginBottomSheetAlert.actionNo, style: .cancel) { [weak self] _ in
+            guard let self else { return }
+            self.delegate?.navigateToHome()
+        }
+        
+        alertController.addAction(saveAction)
+        alertController.addAction(cancelAction)
+        present(alertController, animated: true)
+    }
+    
     func loginBottomSheetAnimateShow(completion: (() -> Void)? = nil) {
         view.layoutIfNeeded()
         screen.transform = CGAffineTransform(translationX: 0, y: screen.frame.height)
@@ -97,9 +119,10 @@ extension LoginBottomSheetViewController: LoginBottomSheetScreenDelegate {
 }
 
 extension LoginBottomSheetViewController: LoginBottomSheetViewModelDelegate {
-    func successResult() {
-        print("Usuário logado com sucesso!")
-        delegate?.navigateToHome()
+    func successResult(email: String) {
+        print("Usuário logado com sucesso!: \(email)")
+        presentSaveLoginAlert(email: email)
+        
     }
     
     func failure(error: String) {

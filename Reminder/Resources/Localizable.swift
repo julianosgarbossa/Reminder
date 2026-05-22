@@ -16,4 +16,11 @@ enum Localizable {
         static let passwordPlaceholder = String(localized: "loginBottomSheet.password.placeholder")
         static let loginButtonTitle = String(localized: "loginBottomSheet.loginButton.title")
     }
+    
+    enum LoginBottomSheetAlert {
+        static let title = String(localized: "loginBottomSheet.alert.title")
+        static let message = String(localized: "loginBottomSheet.alert.message")
+        static let actionYes = String(localized: "loginBottomSheet.alert.action.yes")
+        static let actionNo = String(localized: "loginBottomSheet.alert.action.no")
+    }
 }
