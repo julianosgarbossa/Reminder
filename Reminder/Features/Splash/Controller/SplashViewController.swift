@@ -13,12 +13,13 @@ protocol SplashCoordinatorDelegate: AnyObject {
 
 class SplashViewController: UIViewController {
     
-    private let screen: SplashScreen = SplashScreen()
+    private let screen: SplashScreen
     private weak var delegate: SplashCoordinatorDelegate?
     
-    init(delegate: SplashCoordinatorDelegate) {
-        super.init(nibName: nil, bundle: nil)
+    init(screen: SplashScreen, delegate: SplashCoordinatorDelegate) {
+        self.screen = screen
         self.delegate = delegate
+        super.init(nibName: nil, bundle: nil)
     }
     
     required init?(coder: NSCoder) {

@@ -11,15 +11,17 @@ import UIKit
 class ReminderCoordinator {
     // MARK: Properties
     private var navigationController: UINavigationController?
+    private let viewControllersFactory: ViewControllersFactoryProtocol
     
     // MARK: Init
-    init(navigationController: UINavigationController? = nil) {
+    init(navigationController: UINavigationController? = nil, viewControllersFactory: ViewControllersFactoryProtocol = ViewControllersFactory()) {
         self.navigationController = navigationController
+        self.viewControllersFactory = viewControllersFactory
     }
     
     // MARK: Start
     func start() -> UINavigationController? {
-        let splashViewController: SplashViewController = SplashViewController(delegate: self)
+        let splashViewController: SplashViewController = viewControllersFactory.makeSplashViewController(delegate: self)
         navigationController = UINavigationController(rootViewController: splashViewController)
         return navigationController
     }
@@ -28,8 +30,7 @@ class ReminderCoordinator {
 // MARK: Splash
 extension ReminderCoordinator: SplashCoordinatorDelegate {
     func showLoginBottomSheet() {
-        let loginBottomSheetViewController: LoginBottomSheetViewController = LoginBottomSheetViewController(delegate: self)
-        loginBottomSheetViewController.modalPresentationStyle = .overCurrentContext
+        let loginBottomSheetViewController: LoginBottomSheetViewController = viewControllersFactory.makeLoginBottomSheetViewController(delegate: self)
         navigationController?.topViewController?.present(loginBottomSheetViewController, animated: false) {
             loginBottomSheetViewController.loginBottomSheetAnimateShow()
         }

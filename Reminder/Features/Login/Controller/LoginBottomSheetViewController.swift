@@ -15,7 +15,7 @@ class LoginBottomSheetViewController: UIViewController {
     
     private weak var delegate: LoginBottomSheetCoordinatorDelegate?
     
-    private let screen: LoginBottomSheetScreen = LoginBottomSheetScreen()
+    private let screen: LoginBottomSheetScreen
     private let viewModel: LoginBottomSheetViewModel = LoginBottomSheetViewModel()
     private var handleAreaHeight: CGFloat = 50.0
     
@@ -29,9 +29,10 @@ class LoginBottomSheetViewController: UIViewController {
         }
     }
     
-    init(delegate: LoginBottomSheetCoordinatorDelegate) {
-        super.init(nibName: nil, bundle: nil)
+    init(screen: LoginBottomSheetScreen, delegate: LoginBottomSheetCoordinatorDelegate) {
+        self.screen = screen
         self.delegate = delegate
+        super.init(nibName: nil, bundle: nil)
     }
     
     required init?(coder: NSCoder) {
