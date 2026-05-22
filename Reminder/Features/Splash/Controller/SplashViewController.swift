@@ -40,8 +40,12 @@ class SplashViewController: UIViewController {
         super.viewDidLoad()
         definesPresentationContext = true
         configNavigationControler()
-        decideNavigation()
         setupTapGesture()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
+        decideNavigation()
     }
     
     private func configNavigationControler() {
