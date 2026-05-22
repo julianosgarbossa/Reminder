@@ -78,10 +78,10 @@ class LoginBottomSheetViewController: UIViewController {
     }
     
     private func presentSaveLoginAlert(email: String) {
-        let alertController = UIAlertController(title: Localizable.LoginBottomSheetAlert.title,
-                                                message: Localizable.LoginBottomSheetAlert.message,
+        let alertController = UIAlertController(title: Localizable.LoginBottomSheetAlertSuccess.title,
+                                                message: Localizable.LoginBottomSheetAlertSuccess.message,
                                                 preferredStyle: .alert)
-        let saveAction = UIAlertAction(title: Localizable.LoginBottomSheetAlert.actionYes,
+        let saveAction = UIAlertAction(title: Localizable.LoginBottomSheetAlertSuccess.actionYes,
                                        style: .default) { [weak self] _ in
             guard let self else { return }
             let user = User(email: email, isUserSaved: true)
@@ -89,13 +89,24 @@ class LoginBottomSheetViewController: UIViewController {
             self.delegate?.navigateToHome()
         }
         
-        let cancelAction = UIAlertAction(title: Localizable.LoginBottomSheetAlert.actionNo, style: .cancel) { [weak self] _ in
+        let cancelAction = UIAlertAction(title: Localizable.LoginBottomSheetAlertSuccess.actionNo, style: .cancel) { [weak self] _ in
             guard let self else { return }
             self.delegate?.navigateToHome()
         }
         
         alertController.addAction(saveAction)
         alertController.addAction(cancelAction)
+        present(alertController, animated: true)
+    }
+    
+    private func presentLoginErrorAlert(message: String) {
+        let alertController = UIAlertController(title: Localizable.LoginBottomSheetAlertError.title,
+                                                message: message,
+                                                preferredStyle: .alert)
+        
+        let retryAction = UIAlertAction(title: Localizable.LoginBottomSheetAlertError.actionRetry, style: .cancel)
+        
+        alertController.addAction(retryAction)
         present(alertController, animated: true)
     }
     
@@ -119,12 +130,10 @@ extension LoginBottomSheetViewController: LoginBottomSheetScreenDelegate {
 
 extension LoginBottomSheetViewController: LoginBottomSheetViewModelDelegate {
     func successResult(email: String) {
-        print("Usuário logado com sucesso!: \(email)")
         presentSaveLoginAlert(email: email)
-        
     }
     
     func failure(error: String) {
-        print("Erro ao logar: \(error)")
+        presentLoginErrorAlert(message: Localizable.LoginBottomSheetAlertError.message)
     }
 }

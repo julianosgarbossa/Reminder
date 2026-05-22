@@ -17,10 +17,16 @@ enum Localizable {
         static let loginButtonTitle = String(localized: "loginBottomSheet.loginButton.title")
     }
     
-    enum LoginBottomSheetAlert {
+    enum LoginBottomSheetAlertSuccess {
         static let title = String(localized: "loginBottomSheet.alert.title")
         static let message = String(localized: "loginBottomSheet.alert.message")
         static let actionYes = String(localized: "loginBottomSheet.alert.action.yes")
         static let actionNo = String(localized: "loginBottomSheet.alert.action.no")
+    }
+    
+    enum LoginBottomSheetAlertError {
+        static let title = String(localized: "loginBottomSheet.alert.error.title")
+        static let message = String(localized: "loginBottomSheet.alert.error.message")
+        static let actionRetry = String(localized: "loginBottomSheet.alert.error.action.retry")
     }
 }

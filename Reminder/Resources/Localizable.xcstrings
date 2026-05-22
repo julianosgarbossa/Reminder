@@ -23,6 +23,38 @@
         }
       }
     },
+    "loginBottomSheet.alert.error.action.retry" : {
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tentar novamente"
+          }
+        }
+      }
+    },
+    "loginBottomSheet.alert.error.message" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Erro ao realizar o login, verifique e-mail e senha"
+          }
+        }
+      }
+    },
+    "loginBottomSheet.alert.error.title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Erro ao Logar"
+          }
+        }
+      }
+    },
     "loginBottomSheet.alert.message" : {
       "extractionState" : "manual",
       "localizations" : {
