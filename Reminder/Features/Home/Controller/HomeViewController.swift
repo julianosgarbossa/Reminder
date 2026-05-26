@@ -8,7 +8,7 @@
 import UIKit
 
 protocol HomeCoordinatorDelegate: AnyObject {
-    
+    func logout()
 }
 
 class HomeViewController: UIViewController {
@@ -32,7 +32,8 @@ class HomeViewController: UIViewController {
     
     @objc
     private func tappedLogoutButton(_ sender: UIBarButtonItem) {
-        print("Logout")
+        UserDefaultsManager.shared.removeUser()
+        delegate?.logout()
     }
     
     override func viewDidLoad() {

@@ -32,4 +32,8 @@ final class UserDefaultsManager {
         }
         return nil
     }
+    
+    func removeUser() {
+        UserDefaults.standard.removeObject(forKey: userKey)
+    }
 }
