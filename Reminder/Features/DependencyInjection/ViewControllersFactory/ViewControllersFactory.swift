@@ -11,6 +11,7 @@ import UIKit
 protocol ViewControllersFactoryProtocol {
     func makeSplashViewController(delegate: SplashCoordinatorDelegate) -> SplashViewController
     func makeLoginBottomSheetViewController(delegate: LoginBottomSheetCoordinatorDelegate) -> LoginBottomSheetViewController
+    func makeHomeViewController(delegate: HomeCoordinatorDelegate) -> HomeViewController
 }
 
 final class ViewControllersFactory: ViewControllersFactoryProtocol {
@@ -25,5 +26,11 @@ final class ViewControllersFactory: ViewControllersFactoryProtocol {
         let loginBottomSheetViewController: LoginBottomSheetViewController = LoginBottomSheetViewController(screen: screen, delegate: delegate)
         loginBottomSheetViewController.modalPresentationStyle = .overCurrentContext
         return loginBottomSheetViewController
+    }
+    
+    func makeHomeViewController(delegate: HomeCoordinatorDelegate) -> HomeViewController {
+        let screen: HomeScreen = HomeScreen()
+        let homeViewController: HomeViewController = HomeViewController(screen: screen, delegate: delegate)
+        return homeViewController
     }
 }

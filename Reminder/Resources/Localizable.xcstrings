@@ -1,6 +1,39 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "home.feedbackButton.icon" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "star"
+          }
+        }
+      }
+    },
+    "home.feedbackButton.title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Avaliar"
+          }
+        }
+      }
+    },
+    "home.welcome.title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Boas vindas"
+          }
+        }
+      }
+    },
     "loginBottomSheet.alert.action.no" : {
       "extractionState" : "manual",
       "localizations" : {
