@@ -30,9 +30,27 @@ class HomeViewController: UIViewController {
         view = screen
     }
     
+    @objc
+    private func tappedLogoutButton(_ sender: UIBarButtonItem) {
+        print("Logout")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        
+        setupNavigationBar()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        navigationController?.navigationBar.isHidden = false
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        navigationController?.navigationBar.isHidden = true
+    }
+    
+    private func setupNavigationBar() {
+        let logoutButton = UIBarButtonItem(image: Icon.image(named: Icon.Name.logOut), style: .plain, target: self, action: #selector(tappedLogoutButton))
+        logoutButton.tintColor = Colors.primaryRedBase
+        navigationItem.rightBarButtonItem = logoutButton
     }
 }

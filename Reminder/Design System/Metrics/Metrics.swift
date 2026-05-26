@@ -16,5 +16,5 @@ struct Metrics {
     static let tiny: CGFloat = 8
     static let little: CGFloat = 4
     
-    static let homeProfileHeader: CGFloat = 275
+    static let homeProfileHeader: CGFloat = 300
 }

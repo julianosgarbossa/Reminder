@@ -22,6 +22,7 @@ class HomeScreen: UIView {
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
         imageView.layer.cornerRadius = Metrics.large
+        imageView.image = UIImage(systemName: "person.fill")
         return imageView
     }()
     
@@ -39,6 +40,7 @@ class HomeScreen: UIView {
     private lazy var nameLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "Juliano Sgarbossa"
         label.textColor = Colors.gray100
         label.font = Typography.heading
         label.textAlignment = .left
@@ -58,16 +60,12 @@ class HomeScreen: UIView {
     private lazy var feedbackButton: UIButton = {
         let button = UIButton(type: .system)
         button.translatesAutoresizingMaskIntoConstraints = false
-        let starConfig = UIImage.SymbolConfiguration(
-            pointSize: 16,
-            weight: .bold
-        )
         var title = AttributedString(Localizable.Home.buttonTitle)
         title.font = Typography.subHeading
         title.foregroundColor = Colors.gray800
         var config = UIButton.Configuration.filled()
         config.attributedTitle = title
-        config.image = UIImage(systemName: Localizable.Home.buttonIcon, withConfiguration: starConfig)
+        config.image = Icon.image(named: Icon.Name.star, size: CGSize(width: 25, height: 25))
         config.imagePlacement = .leading
         config.imagePadding = Metrics.tiny
         config.baseForegroundColor = Colors.gray800
@@ -114,7 +112,7 @@ class HomeScreen: UIView {
             profileBackgroundView.trailingAnchor.constraint(equalTo: trailingAnchor),
             profileBackgroundView.heightAnchor.constraint(equalToConstant: Metrics.homeProfileHeader),
             
-            profileImageView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: Metrics.medium),
+            profileImageView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
             profileImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Metrics.medium),
             profileImageView.widthAnchor.constraint(equalToConstant: Metrics.giant),
             profileImageView.heightAnchor.constraint(equalToConstant: Metrics.giant),

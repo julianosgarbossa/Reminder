@@ -41,7 +41,6 @@ class SplashViewController: UIViewController {
         super.viewDidLoad()
         definesPresentationContext = true
         configNavigationControler()
-        setupTapGesture()
         startBreathingAnimation()
     }
     
@@ -59,6 +58,7 @@ class SplashViewController: UIViewController {
             delegate?.showHome()
         } else {
             showLoginBottomSheet()
+            setupTapGesture()
         }
     }
 }
