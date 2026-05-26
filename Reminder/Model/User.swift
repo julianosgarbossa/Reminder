@@ -9,5 +9,6 @@ import Foundation
 
 struct User: Codable {
     let email: String
+    var name: String?
     let isUserSaved: Bool
 }

@@ -15,6 +15,7 @@ class HomeViewController: UIViewController {
 
     private weak var delegate: HomeCoordinatorDelegate?
     private var screen: HomeScreen
+    private let viewModel: HomeViewModel = HomeViewModel()
     
     init(screen: HomeScreen, delegate: HomeCoordinatorDelegate) {
         self.screen = screen
@@ -32,7 +33,7 @@ class HomeViewController: UIViewController {
     
     @objc
     private func tappedLogoutButton(_ sender: UIBarButtonItem) {
-        UserDefaultsManager.shared.removeUser()
+        viewModel.logout()
         delegate?.logout()
     }
     
@@ -40,6 +41,7 @@ class HomeViewController: UIViewController {
         super.viewDidLoad()
         setupNavigationBar()
         configDelegates()
+        loadUserData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -52,12 +54,17 @@ class HomeViewController: UIViewController {
     
     private func configDelegates() {
         screen.configDelegate(delegate: self)
+        screen.configTextFieldDelegate(delegate: self)
     }
     
     private func setupNavigationBar() {
         let logoutButton = UIBarButtonItem(image: Icon.image(named: Icon.Name.logOut), style: .plain, target: self, action: #selector(tappedLogoutButton))
         logoutButton.tintColor = Colors.primaryRedBase
         navigationItem.rightBarButtonItem = logoutButton
+    }
+    
+    private func loadUserData() {
+        screen.configureUserName(viewModel.loadUserName())
     }
 }
 
@@ -67,7 +74,7 @@ extension HomeViewController: HomeScreenDelegate {
     }
 }
 
-extension HomeViewController: UIImagePickerControllerDelegate {
+extension HomeViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     private func selectProfileImage() {
         let imagePicker = UIImagePickerController()
         imagePicker.delegate = self
@@ -90,6 +97,13 @@ extension HomeViewController: UIImagePickerControllerDelegate {
     }
 }
 
-extension HomeViewController: UINavigationControllerDelegate {
-   
+extension HomeViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        viewModel.updateUserName(textField.text)
+    }
 }

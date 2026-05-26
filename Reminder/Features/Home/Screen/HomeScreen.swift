@@ -48,15 +48,15 @@ class HomeScreen: UIView {
         return label
     }()
     
-    private lazy var nameLabel: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "Juliano Sgarbossa"
-        label.textColor = Colors.gray100
-        label.font = Typography.heading
-        label.textAlignment = .left
-        label.numberOfLines = 1
-        return label
+    lazy var nameTextField: UITextField = {
+        let textfield = UITextField()
+        textfield.translatesAutoresizingMaskIntoConstraints = false
+        textfield.placeholder = Localizable.Home.namePlaceholder
+        textfield.textColor = Colors.gray100
+        textfield.font = Typography.heading
+        textfield.returnKeyType = .done
+        textfield.textAlignment = .left
+        return textfield
     }()
     
     private lazy var contentBackgroundView: UIView = {
@@ -114,7 +114,7 @@ class HomeScreen: UIView {
         addSubview(profileBackgroundView)
         profileBackgroundView.addSubview(profileImageView)
         profileBackgroundView.addSubview(welcomeLabel)
-        profileBackgroundView.addSubview(nameLabel)
+        profileBackgroundView.addSubview(nameTextField)
         
         addSubview(contentBackgroundView)
         contentBackgroundView.addSubview(feedbackButton)
@@ -138,9 +138,9 @@ class HomeScreen: UIView {
             welcomeLabel.leadingAnchor.constraint(equalTo: profileImageView.leadingAnchor),
             welcomeLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -Metrics.medium),
             
-            nameLabel.topAnchor.constraint(equalTo: welcomeLabel.bottomAnchor, constant: Metrics.little),
-            nameLabel.leadingAnchor.constraint(equalTo: welcomeLabel.leadingAnchor),
-            nameLabel.trailingAnchor.constraint(equalTo: welcomeLabel.trailingAnchor),
+            nameTextField.topAnchor.constraint(equalTo: welcomeLabel.bottomAnchor, constant: Metrics.little),
+            nameTextField.leadingAnchor.constraint(equalTo: welcomeLabel.leadingAnchor),
+            nameTextField.trailingAnchor.constraint(equalTo: welcomeLabel.trailingAnchor),
             
             contentBackgroundView.topAnchor.constraint(equalTo: profileBackgroundView.bottomAnchor, constant: -Metrics.large),
             contentBackgroundView.leadingAnchor.constraint(equalTo: profileBackgroundView.leadingAnchor),
@@ -157,5 +157,13 @@ class HomeScreen: UIView {
     private func setupTapGesture() {
         let tap = UITapGestureRecognizer(target: self, action: #selector(tappadUserProfileImageView))
         profileImageView.addGestureRecognizer(tap)
+    }
+    
+    func configTextFieldDelegate(delegate: UITextFieldDelegate) {
+        nameTextField.delegate = delegate
+    }
+    
+    func configureUserName(_ name: String?) {
+        nameTextField.text = name
     }
 }

@@ -12,6 +12,16 @@
         }
       }
     },
+    "home.name.placeholder" : {
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Insira seu nome"
+          }
+        }
+      }
+    },
     "home.welcome.title" : {
       "extractionState" : "manual",
       "localizations" : {
