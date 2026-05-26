@@ -39,6 +39,7 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavigationBar()
+        configDelegates()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -49,9 +50,46 @@ class HomeViewController: UIViewController {
         navigationController?.navigationBar.isHidden = true
     }
     
+    private func configDelegates() {
+        screen.configDelegate(delegate: self)
+    }
+    
     private func setupNavigationBar() {
         let logoutButton = UIBarButtonItem(image: Icon.image(named: Icon.Name.logOut), style: .plain, target: self, action: #selector(tappedLogoutButton))
         logoutButton.tintColor = Colors.primaryRedBase
         navigationItem.rightBarButtonItem = logoutButton
     }
+}
+
+extension HomeViewController: HomeScreenDelegate {
+    func didTapUserProfileImageView() {
+        selectProfileImage()
+    }
+}
+
+extension HomeViewController: UIImagePickerControllerDelegate {
+    private func selectProfileImage() {
+        let imagePicker = UIImagePickerController()
+        imagePicker.delegate = self
+        imagePicker.sourceType = .photoLibrary
+        imagePicker.allowsEditing = true
+        present(imagePicker, animated: true)
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        if let editedImage = info[.editedImage] as? UIImage {
+            screen.profileImageView.image = editedImage
+        } else if let originalImage = info[.originalImage] as? UIImage {
+            screen.profileImageView.image = originalImage
+        }
+        dismiss(animated: true)
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        dismiss(animated: true)
+    }
+}
+
+extension HomeViewController: UINavigationControllerDelegate {
+   
 }

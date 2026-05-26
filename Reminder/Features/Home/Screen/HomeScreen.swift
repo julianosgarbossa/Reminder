@@ -7,7 +7,17 @@
 
 import UIKit
 
+protocol HomeScreenDelegate: AnyObject {
+    func didTapUserProfileImageView()
+}
+
 class HomeScreen: UIView {
+    
+    private weak var delegate: HomeScreenDelegate?
+    
+    func configDelegate(delegate: HomeScreenDelegate) {
+        self.delegate = delegate
+    }
     
     private lazy var profileBackgroundView: UIView = {
         let view = UIView()
@@ -16,13 +26,14 @@ class HomeScreen: UIView {
         return view
     }()
     
-    private lazy var profileImageView: UIImageView = {
+    lazy var profileImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
         imageView.layer.cornerRadius = Metrics.large
-        imageView.image = UIImage(systemName: "person.fill")
+        imageView.image = UIImage(named: Image.Name.userPhotoDefault)
+        imageView.isUserInteractionEnabled = true
         return imageView
     }()
     
@@ -83,9 +94,15 @@ class HomeScreen: UIView {
         print("Avaliar")
     }
     
+    @objc
+    private func tappadUserProfileImageView(_ sender: UIImageView) {
+        delegate?.didTapUserProfileImageView()
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         addVisualElements()
+        setupTapGesture()
     }
     
     required init?(coder: NSCoder) {
@@ -135,5 +152,10 @@ class HomeScreen: UIView {
             feedbackButton.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -Metrics.medium),
             feedbackButton.heightAnchor.constraint(equalToConstant: Metrics.huge),
         ])
+    }
+    
+    private func setupTapGesture() {
+        let tap = UITapGestureRecognizer(target: self, action: #selector(tappadUserProfileImageView))
+        profileImageView.addGestureRecognizer(tap)
     }
 }
