@@ -10,19 +10,19 @@ import Foundation
 final class HomeViewModel {
     
     func loadUser() -> User? {
-        return UserDefaultsManager.shared.loadUser()
+        UserDefaultsManager.shared.loadCurrentUser()
     }
     
     func updateUserName(_ name: String?) {
         guard let name else { return }
-        UserDefaultsManager.shared.updateUserName(name: name)
+        UserDefaultsManager.shared.updateCurrentUserName(name: name)
     }
     
     func updateUserProfileImage(data: Data?) {
-        UserDefaultsManager.shared.updateUserProfileImage(data: data)
+        UserDefaultsManager.shared.updateCurrentUserProfileImage(data: data)
     }
     
     func logout() {
-        UserDefaultsManager.shared.removeUser()
+        UserDefaultsManager.shared.logout()
     }
 }

@@ -84,13 +84,13 @@ class LoginBottomSheetViewController: UIViewController {
         let saveAction = UIAlertAction(title: Localizable.LoginBottomSheetAlertSuccess.actionYes,
                                        style: .default) { [weak self] _ in
             guard let self else { return }
-            let user = User(email: email, isUserSaved: true)
-            UserDefaultsManager.shared.save(user: user)
+            self.viewModel.saveLogin(email: email)
             self.delegate?.navigateToHome()
         }
         
         let cancelAction = UIAlertAction(title: Localizable.LoginBottomSheetAlertSuccess.actionNo, style: .cancel) { [weak self] _ in
             guard let self else { return }
+            self.viewModel.continueWithoutSavingAccess(email: email)
             self.delegate?.navigateToHome()
         }
         

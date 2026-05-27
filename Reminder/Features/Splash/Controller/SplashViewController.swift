@@ -15,6 +15,7 @@ protocol SplashCoordinatorDelegate: AnyObject {
 class SplashViewController: UIViewController {
     
     private let screen: SplashScreen
+    private let viewModel: SplashViewModel = SplashViewModel()
     private weak var delegate: SplashCoordinatorDelegate?
     
     init(screen: SplashScreen, delegate: SplashCoordinatorDelegate) {
@@ -54,7 +55,7 @@ class SplashViewController: UIViewController {
     }
     
     private func decideNavigation() {
-        if let user = UserDefaultsManager.shared.loadUser() , user.isUserSaved {
+        if viewModel.hasLoggedUser {
             delegate?.showHome()
         } else {
             showLoginBottomSheet()

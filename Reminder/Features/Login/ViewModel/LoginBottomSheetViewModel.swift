@@ -31,4 +31,14 @@ class LoginBottomSheetViewModel {
             }
         }
     }
+    
+    func saveLogin(email: String) {
+        let user = User(id: email, email: email)
+        UserDefaultsManager.shared.login(user: user)
+    }
+    
+    func continueWithoutSavingAccess(email: String) {
+        let user = User(id: email, email: email)
+        UserDefaultsManager.shared.loginTemporarily(user: user)
+    }
 }
