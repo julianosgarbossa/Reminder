@@ -1,6 +1,50 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "home.buttonNewRecipe.description" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cadastre novos lembretes de receitas"
+          }
+        }
+      }
+    },
+    "home.buttonNewRecipe.title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nova receita"
+          }
+        }
+      }
+    },
+    "home.buttonRecipe.description" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Acompanhe os medicamentos e gerencie lembretes"
+          }
+        }
+      }
+    },
+    "home.buttonRecipe.title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Minhas receitas"
+          }
+        }
+      }
+    },
     "home.feedbackButton.title" : {
       "extractionState" : "manual",
       "localizations" : {

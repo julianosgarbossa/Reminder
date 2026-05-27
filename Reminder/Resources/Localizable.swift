@@ -34,5 +34,9 @@ enum Localizable {
         static let welcome = String(localized: "home.welcome.title")
         static let namePlaceholder = String(localized: "home.name.placeholder")
         static let buttonTitle = String(localized: "home.feedbackButton.title")
+        static let buttonRecipeTitle = String(localized: "home.buttonRecipe.title")
+        static let buttonRecipeDescription = String(localized: "home.buttonRecipe.description")
+        static let buttonNewRecipeTitle = String(localized: "home.buttonNewRecipe.title")
+        static let buttonNewRecipeDescription = String(localized: "home.buttonNewRecipe.description")
     }
 }

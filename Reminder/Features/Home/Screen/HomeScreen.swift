@@ -68,6 +68,22 @@ class HomeScreen: UIView {
         return view
     }()
     
+    private lazy var myRecipesButton: ButtonHomeView = {
+        let button = ButtonHomeView(icon: UIImage(named: Icon.Name.paper),
+                                    title: Localizable.Home.buttonRecipeTitle,
+                                    description: Localizable.Home.buttonRecipeDescription)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
+    private lazy var newRecipeButton: ButtonHomeView = {
+        let button = ButtonHomeView(icon: UIImage(named: Icon.Name.pills),
+                                    title: Localizable.Home.buttonNewRecipeTitle,
+                                    description: Localizable.Home.buttonNewRecipeDescription)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
     private lazy var feedbackButton: UIButton = {
         let button = UIButton(type: .system)
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -117,6 +133,8 @@ class HomeScreen: UIView {
         profileBackgroundView.addSubview(nameTextField)
         
         addSubview(contentBackgroundView)
+        contentBackgroundView.addSubview(myRecipesButton)
+        contentBackgroundView.addSubview(newRecipeButton)
         contentBackgroundView.addSubview(feedbackButton)
         
         configConstraints()
@@ -146,6 +164,16 @@ class HomeScreen: UIView {
             contentBackgroundView.leadingAnchor.constraint(equalTo: profileBackgroundView.leadingAnchor),
             contentBackgroundView.trailingAnchor.constraint(equalTo: profileBackgroundView.trailingAnchor),
             contentBackgroundView.bottomAnchor.constraint(equalTo: bottomAnchor),
+            
+            myRecipesButton.topAnchor.constraint(equalTo: contentBackgroundView.topAnchor, constant: Spacing.large),
+            myRecipesButton.leadingAnchor.constraint(equalTo: welcomeLabel.leadingAnchor),
+            myRecipesButton.trailingAnchor.constraint(equalTo: welcomeLabel.trailingAnchor),
+            myRecipesButton.heightAnchor.constraint(equalToConstant: Spacing.homeButtonbackground),
+            
+            newRecipeButton.topAnchor.constraint(equalTo: myRecipesButton.bottomAnchor, constant: Spacing.regular),
+            newRecipeButton.leadingAnchor.constraint(equalTo: welcomeLabel.leadingAnchor),
+            newRecipeButton.trailingAnchor.constraint(equalTo: welcomeLabel.trailingAnchor),
+            newRecipeButton.heightAnchor.constraint(equalToConstant: Spacing.homeButtonbackground),
             
             feedbackButton.leadingAnchor.constraint(equalTo: welcomeLabel.leadingAnchor),
             feedbackButton.trailingAnchor.constraint(equalTo: welcomeLabel.trailingAnchor),
