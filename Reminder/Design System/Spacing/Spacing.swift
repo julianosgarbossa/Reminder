@@ -1,5 +1,5 @@
 //
-//  Metrics.swift
+//  Spacing.swift
 //  Reminder
 //
 //  Created by Juliano Sgarbossa on 18/05/26.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Metrics {
+struct Spacing {
     static let giant: CGFloat = 64
     static let huge: CGFloat = 48
     static let large: CGFloat = 32

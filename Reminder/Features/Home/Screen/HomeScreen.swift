@@ -31,7 +31,7 @@ class HomeScreen: UIView {
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
-        imageView.layer.cornerRadius = Metrics.large
+        imageView.layer.cornerRadius = Spacing.large
         imageView.image = UIImage(named: Image.Name.userPhotoDefault)
         imageView.isUserInteractionEnabled = true
         return imageView
@@ -63,7 +63,7 @@ class HomeScreen: UIView {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = Colors.gray800
-        view.layer.cornerRadius = Metrics.medium
+        view.layer.cornerRadius = Spacing.medium
         view.layer.masksToBounds = true
         return view
     }()
@@ -78,7 +78,7 @@ class HomeScreen: UIView {
         config.attributedTitle = title
         config.image = Icon.image(named: Icon.Name.star, size: CGSize(width: 25, height: 25))
         config.imagePlacement = .leading
-        config.imagePadding = Metrics.tiny
+        config.imagePadding = Spacing.tiny
         config.baseForegroundColor = Colors.gray800
         config.baseBackgroundColor = Colors.gray100
         config.cornerStyle = .capsule
@@ -127,30 +127,30 @@ class HomeScreen: UIView {
             profileBackgroundView.topAnchor.constraint(equalTo: topAnchor),
             profileBackgroundView.leadingAnchor.constraint(equalTo: leadingAnchor),
             profileBackgroundView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            profileBackgroundView.heightAnchor.constraint(equalToConstant: Metrics.homeProfileHeader),
+            profileBackgroundView.heightAnchor.constraint(equalToConstant: Spacing.homeProfileHeader),
             
             profileImageView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
-            profileImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Metrics.medium),
-            profileImageView.widthAnchor.constraint(equalToConstant: Metrics.giant),
-            profileImageView.heightAnchor.constraint(equalToConstant: Metrics.giant),
+            profileImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Spacing.medium),
+            profileImageView.widthAnchor.constraint(equalToConstant: Spacing.giant),
+            profileImageView.heightAnchor.constraint(equalToConstant: Spacing.giant),
             
-            welcomeLabel.topAnchor.constraint(equalTo: profileImageView.bottomAnchor, constant: Metrics.small),
+            welcomeLabel.topAnchor.constraint(equalTo: profileImageView.bottomAnchor, constant: Spacing.small),
             welcomeLabel.leadingAnchor.constraint(equalTo: profileImageView.leadingAnchor),
-            welcomeLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -Metrics.medium),
+            welcomeLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -Spacing.medium),
             
-            nameTextField.topAnchor.constraint(equalTo: welcomeLabel.bottomAnchor, constant: Metrics.little),
+            nameTextField.topAnchor.constraint(equalTo: welcomeLabel.bottomAnchor, constant: Spacing.little),
             nameTextField.leadingAnchor.constraint(equalTo: welcomeLabel.leadingAnchor),
             nameTextField.trailingAnchor.constraint(equalTo: welcomeLabel.trailingAnchor),
             
-            contentBackgroundView.topAnchor.constraint(equalTo: profileBackgroundView.bottomAnchor, constant: -Metrics.large),
+            contentBackgroundView.topAnchor.constraint(equalTo: profileBackgroundView.bottomAnchor, constant: -Spacing.large),
             contentBackgroundView.leadingAnchor.constraint(equalTo: profileBackgroundView.leadingAnchor),
             contentBackgroundView.trailingAnchor.constraint(equalTo: profileBackgroundView.trailingAnchor),
             contentBackgroundView.bottomAnchor.constraint(equalTo: bottomAnchor),
             
             feedbackButton.leadingAnchor.constraint(equalTo: welcomeLabel.leadingAnchor),
             feedbackButton.trailingAnchor.constraint(equalTo: welcomeLabel.trailingAnchor),
-            feedbackButton.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -Metrics.medium),
-            feedbackButton.heightAnchor.constraint(equalToConstant: Metrics.huge),
+            feedbackButton.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -Spacing.medium),
+            feedbackButton.heightAnchor.constraint(equalToConstant: Spacing.huge),
         ])
     }
     

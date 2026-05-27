@@ -23,7 +23,7 @@ class LoginBottomSheetScreen: UIView {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = Colors.gray600
-        view.layer.cornerRadius = Metrics.tiny
+        view.layer.cornerRadius = Spacing.tiny
         return view
     }()
     
@@ -105,7 +105,7 @@ class LoginBottomSheetScreen: UIView {
         button.titleLabel?.textAlignment = .center
         button.titleLabel?.numberOfLines = 1
         button.backgroundColor = Colors.primaryRedBase
-        button.layer.cornerRadius = Metrics.medium
+        button.layer.cornerRadius = Spacing.medium
         button.addTarget(self, action: #selector(tappedLoginButton), for: .touchUpInside)
         return button
     }()
@@ -129,7 +129,7 @@ class LoginBottomSheetScreen: UIView {
     
     private func configScreen() {
         backgroundColor = Colors.gray800
-        layer.cornerRadius = Metrics.medium
+        layer.cornerRadius = Spacing.medium
         layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         layer.masksToBounds = true
     }
@@ -148,34 +148,34 @@ class LoginBottomSheetScreen: UIView {
     
     private func configConstraints() {
         NSLayoutConstraint.activate([
-            handleAreaView.topAnchor.constraint(equalTo: topAnchor, constant: Metrics.small),
+            handleAreaView.topAnchor.constraint(equalTo: topAnchor, constant: Spacing.small),
             handleAreaView.centerXAnchor.constraint(equalTo: centerXAnchor),
-            handleAreaView.widthAnchor.constraint(equalToConstant: Metrics.huge),
-            handleAreaView.heightAnchor.constraint(equalToConstant: Metrics.tiny),
+            handleAreaView.widthAnchor.constraint(equalToConstant: Spacing.huge),
+            handleAreaView.heightAnchor.constraint(equalToConstant: Spacing.tiny),
             
-            titleLabel.topAnchor.constraint(equalTo: handleAreaView.bottomAnchor, constant: Metrics.medium),
-            titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Metrics.medium),
-            titleLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -Metrics.medium),
+            titleLabel.topAnchor.constraint(equalTo: handleAreaView.bottomAnchor, constant: Spacing.medium),
+            titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Spacing.medium),
+            titleLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -Spacing.medium),
             
-            emailLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: Metrics.medium),
+            emailLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: Spacing.medium),
             emailLabel.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor),
             emailLabel.trailingAnchor.constraint(equalTo: titleLabel.trailingAnchor),
             
-            emailTextField.topAnchor.constraint(equalTo: emailLabel.bottomAnchor, constant: Metrics.small),
+            emailTextField.topAnchor.constraint(equalTo: emailLabel.bottomAnchor, constant: Spacing.small),
             emailTextField.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor),
             emailTextField.trailingAnchor.constraint(equalTo: titleLabel.trailingAnchor),
-            emailTextField.heightAnchor.constraint(equalToConstant: Metrics.huge),
+            emailTextField.heightAnchor.constraint(equalToConstant: Spacing.huge),
             
-            passwordLabel.topAnchor.constraint(equalTo: emailTextField.bottomAnchor, constant: Metrics.medium),
+            passwordLabel.topAnchor.constraint(equalTo: emailTextField.bottomAnchor, constant: Spacing.medium),
             passwordLabel.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor),
             passwordLabel.trailingAnchor.constraint(equalTo: titleLabel.trailingAnchor),
             
-            passwordTextField.topAnchor.constraint(equalTo: passwordLabel.bottomAnchor, constant: Metrics.small),
+            passwordTextField.topAnchor.constraint(equalTo: passwordLabel.bottomAnchor, constant: Spacing.small),
             passwordTextField.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor),
             passwordTextField.trailingAnchor.constraint(equalTo: titleLabel.trailingAnchor),
             passwordTextField.heightAnchor.constraint(equalTo: emailTextField.heightAnchor),
             
-            loginButton.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor, constant: Metrics.medium),
+            loginButton.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor, constant: Spacing.medium),
             loginButton.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor),
             loginButton.trailingAnchor.constraint(equalTo: titleLabel.trailingAnchor),
             loginButton.heightAnchor.constraint(equalTo: emailTextField.heightAnchor),
