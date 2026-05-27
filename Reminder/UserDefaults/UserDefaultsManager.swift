@@ -47,7 +47,18 @@ final class UserDefaultsManager {
         save(user: user)
     }
     
+    func updateUserProfileImage(data: Data?) {
+        guard var user = loadUser() else {
+            return
+        }
+
+        user.profileImageData = data
+        save(user: user)
+    }
+    
     func removeUser() {
         userDefaults.removeObject(forKey: userKey)
     }
+    
+
 }

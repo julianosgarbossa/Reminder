@@ -163,7 +163,8 @@ class HomeScreen: UIView {
         nameTextField.delegate = delegate
     }
     
-    func configureUserName(_ name: String?) {
-        nameTextField.text = name
+    func configureUserName(user: User?) {
+        nameTextField.text = user?.name
+        profileImageView.image = user?.profileImageData?.toUIImage() ?? UIImage(named: Image.Name.userPhotoDefault)
     }
 }

@@ -64,7 +64,7 @@ class HomeViewController: UIViewController {
     }
     
     private func loadUserData() {
-        screen.configureUserName(viewModel.loadUserName())
+        screen.configureUserName(user: viewModel.loadUser())
     }
 }
 
@@ -86,8 +86,10 @@ extension HomeViewController: UIImagePickerControllerDelegate, UINavigationContr
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let editedImage = info[.editedImage] as? UIImage {
             screen.profileImageView.image = editedImage
+            viewModel.updateUserProfileImage(data: editedImage.toJPEGData())
         } else if let originalImage = info[.originalImage] as? UIImage {
             screen.profileImageView.image = originalImage
+            viewModel.updateUserProfileImage(data: originalImage.toJPEGData())
         }
         dismiss(animated: true)
     }

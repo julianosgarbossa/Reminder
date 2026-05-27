@@ -10,5 +10,6 @@ import Foundation
 struct User: Codable {
     let email: String
     var name: String?
+    var profileImageData: Data?
     let isUserSaved: Bool
 }
