@@ -29,4 +29,10 @@ enum Localizable {
         static let message = String(localized: "loginBottomSheet.alert.error.message")
         static let actionRetry = String(localized: "loginBottomSheet.alert.error.action.retry")
     }
+    
+    enum Home {
+        static let welcome = String(localized: "home.welcome.title")
+        static let namePlaceholder = String(localized: "home.name.placeholder")
+        static let buttonTitle = String(localized: "home.feedbackButton.title")
+    }
 }

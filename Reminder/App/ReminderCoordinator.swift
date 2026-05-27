@@ -44,10 +44,17 @@ extension ReminderCoordinator: SplashCoordinatorDelegate {
 // MARK: Login
 extension ReminderCoordinator: LoginBottomSheetCoordinatorDelegate {
     func navigateToHome() {
-        let homeViewController = UIViewController()
-        homeViewController.view.backgroundColor = .red
+        let homeViewController: HomeViewController = viewControllersFactory.makeHomeViewController(delegate: self)
         navigationController?.dismiss(animated: false) {
             self.navigationController?.setViewControllers([homeViewController], animated: true)
         }
+    }
+}
+
+// MARK: Home
+extension ReminderCoordinator: HomeCoordinatorDelegate {
+    func logout() {
+        let splashViewController: SplashViewController = viewControllersFactory.makeSplashViewController(delegate: self)
+        self.navigationController?.setViewControllers([splashViewController], animated: true)
     }
 }

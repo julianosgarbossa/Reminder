@@ -12,7 +12,7 @@ class SplashScreen: UIView {
     lazy var logoImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.image = UIImage(named: "logo")
+        imageView.image = UIImage(named: Image.Name.reminderLogo)
         imageView.contentMode = .scaleAspectFit
         return imageView
     }()
