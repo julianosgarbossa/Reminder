@@ -9,6 +9,7 @@ import UIKit
 
 protocol HomeScreenDelegate: AnyObject {
     func didTapUserProfileImageView()
+    func didTapNewPresctation()
 }
 
 class HomeScreen: UIView {
@@ -81,6 +82,9 @@ class HomeScreen: UIView {
                                     title: Localizable.Home.buttonNewRecipeTitle,
                                     description: Localizable.Home.buttonNewRecipeDescription)
         button.translatesAutoresizingMaskIntoConstraints = false
+        button.isUserInteractionEnabled = true
+        let tap = UITapGestureRecognizer(target: self, action: #selector(tappedNewPrescription))
+        button.addGestureRecognizer(tap)
         return button
     }()
     
@@ -113,6 +117,11 @@ class HomeScreen: UIView {
     @objc
     private func tappadUserProfileImageView(_ sender: UIImageView) {
         delegate?.didTapUserProfileImageView()
+    }
+    
+    @objc
+    private func tappedNewPrescription() {
+        delegate?.didTapNewPresctation()
     }
     
     override init(frame: CGRect) {

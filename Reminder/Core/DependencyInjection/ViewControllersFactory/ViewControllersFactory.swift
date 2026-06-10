@@ -12,6 +12,7 @@ protocol ViewControllersFactoryProtocol {
     func makeSplashViewController(delegate: SplashCoordinatorDelegate) -> SplashViewController
     func makeLoginBottomSheetViewController(delegate: LoginBottomSheetCoordinatorDelegate) -> LoginBottomSheetViewController
     func makeHomeViewController(delegate: HomeCoordinatorDelegate) -> HomeViewController
+    func makeNewPrescriptionViewController(delegate: NewPrescriptionCoordinatorDelegate) -> NewPrescriptionViewController
 }
 
 final class ViewControllersFactory: ViewControllersFactoryProtocol {
@@ -32,5 +33,11 @@ final class ViewControllersFactory: ViewControllersFactoryProtocol {
         let screen: HomeScreen = HomeScreen()
         let homeViewController: HomeViewController = HomeViewController(screen: screen, delegate: delegate)
         return homeViewController
+    }
+    
+    func makeNewPrescriptionViewController(delegate: NewPrescriptionCoordinatorDelegate) -> NewPrescriptionViewController {
+        let screen: NewPrescriptionScreen = NewPrescriptionScreen()
+        let newPrescriptionViewController: NewPrescriptionViewController = NewPrescriptionViewController(screen: screen, delegate: delegate)
+        return newPrescriptionViewController
     }
 }

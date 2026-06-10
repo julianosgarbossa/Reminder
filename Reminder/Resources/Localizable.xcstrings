@@ -218,6 +218,39 @@
           }
         }
       }
+    },
+    "newPrescription.button.title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Adicionar"
+          }
+        }
+      }
+    },
+    "newPrescription.description" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Adicione a sua prescrição médica para receber lembretes de quando tomar seu medicamento"
+          }
+        }
+      }
+    },
+    "newPrescription.title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nova receita"
+          }
+        }
+      }
     }
   },
   "version" : "1.2"

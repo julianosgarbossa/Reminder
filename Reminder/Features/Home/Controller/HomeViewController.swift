@@ -9,6 +9,7 @@ import UIKit
 
 protocol HomeCoordinatorDelegate: AnyObject {
     func logout()
+    func newPresentation()
 }
 
 class HomeViewController: UIViewController {
@@ -16,6 +17,12 @@ class HomeViewController: UIViewController {
     private weak var delegate: HomeCoordinatorDelegate?
     private var screen: HomeScreen
     private let viewModel: HomeViewModel = HomeViewModel()
+    
+    @objc
+    private func tappedLogoutButton(_ sender: UIBarButtonItem) {
+        viewModel.logout()
+        delegate?.logout()
+    }
     
     init(screen: HomeScreen, delegate: HomeCoordinatorDelegate) {
         self.screen = screen
@@ -29,12 +36,6 @@ class HomeViewController: UIViewController {
     
     override func loadView() {
         view = screen
-    }
-    
-    @objc
-    private func tappedLogoutButton(_ sender: UIBarButtonItem) {
-        viewModel.logout()
-        delegate?.logout()
     }
     
     override func viewDidLoad() {
@@ -69,6 +70,10 @@ class HomeViewController: UIViewController {
 }
 
 extension HomeViewController: HomeScreenDelegate {
+    func didTapNewPresctation() {
+        delegate?.newPresentation()
+    }
+    
     func didTapUserProfileImageView() {
         selectProfileImage()
     }

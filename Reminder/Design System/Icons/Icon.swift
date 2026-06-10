@@ -16,6 +16,8 @@ struct Icon {
         static let arrow = "arrow"
         static let paper = "paper"
         static let pills = "pills"
+        static let back = "back"
+        static let plus = "plus"
     }
     
     static func image(named name: String, size: CGSize = CGSize(width: 25, height: 25)) -> UIImage? {

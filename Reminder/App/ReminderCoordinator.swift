@@ -57,4 +57,16 @@ extension ReminderCoordinator: HomeCoordinatorDelegate {
         let splashViewController: SplashViewController = viewControllersFactory.makeSplashViewController(delegate: self)
         self.navigationController?.setViewControllers([splashViewController], animated: true)
     }
+    
+    func newPresentation() {
+        let newPrescriptionViewController: NewPrescriptionViewController = viewControllersFactory.makeNewPrescriptionViewController(delegate: self)
+        self.navigationController?.pushViewController(newPrescriptionViewController, animated: true)
+    }
+}
+
+// MARK: NewPrescription
+extension ReminderCoordinator: NewPrescriptionCoordinatorDelegate {
+    func backButton() {
+        navigationController?.popViewController(animated: true)
+    }
 }
